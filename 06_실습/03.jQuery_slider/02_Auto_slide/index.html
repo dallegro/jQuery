@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>auto Slide</title>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script src="jquery-ui.min.js"></script>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background-color: lightgoldenrodyellow;
+
+        }
+
+        div#slider {
+            width: 600px;
+            background-color: #fff;
+            margin: 0 auto;
+            margin-top: 100px;
+            border: 2px solid #fdf6dd;
+            position: relative;
+            overflow: hidden;
+        }
+
+        ul#viewer {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            width: 400%;
+            position: relative;
+            left: 0;
+        }
+
+        ul#viewer:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        ul#viewer li {
+            float: left;
+            width: 25%;
+        }
+
+        ul#viewer li img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /*btnGroup*/
+        #btnGroup {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            position: absolute;
+            right: 0;
+            bottom: 2%;
+        }
+
+        #btnGroup li {
+            width: 16px;
+            height: 16px;
+            float: left;
+            margin-right: 6px;
+        }
+
+        #btnGroup li a {
+            text-decoration: none;
+            text-align: center;
+            background: url(image/btn.png) no-repeat;
+            display: block;
+            width: 100%;
+            height: 100%;
+
+        }
+
+        /*선택된 li에 적용된 class*/
+        .selB a {
+            background-position: 0 -15px !important;
+        }
+
+        #btnGroup li a span {
+            display: none;
+        }
+
+        /*arrow Btn*/
+        .abtn {
+            width: 25px;
+            height: 49px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .abtn:hover {
+            background-position: 0 -49px;
+        }
+
+        .btnL {
+            background: url(image/btn_shop_bn_left.png) no-repeat;
+            left: 6px;
+        }
+
+        .btnR {
+            background: url(image/btn_shop_bn_right.png)no-repeat;
+            right: 6px;
+        }
+    </style>
+
+    <script>
+        /*////////////////////////////////////////
+        
+            함수명 : slideSlide
+            기능 : 슬라이드 이동 애니메이션
+        
+        ////////////////////////////////////////*/
+
+        var sideSlide = function(c) {
+            //매개변수 c - 호출구분자 (0- 인터발 호출, 1- 오른쪽버튼호출)
+            $('#viewer').animate({
+                left: '-100%'
+            }, 600, function() {
+                //#viewer가 left:-100% 만큼 이동한 다음
+                //1. 맨 앞의 요소를 맨 뒤로 이동시킨다
+                $('#viewer').append($('li:first')).css({
+                    //2. left값 초기화
+                    left: '0'
+                }); //css()
+            }); //animate()
+
+            //만약 버튼에서 호출했을 때 (오른쪽 버튼 눌렀을 때) - 자동호출(setInterval) 지우기!
+            if (c === 1) clearAutoSide();
+
+            //오른쪽 이동시 블릿순번은 항상 두번째!!
+            bseq = $('#viewer').find('li').eq(1).attr('data-seq');
+
+            //불릿변경 호출하기 (인터발일때만 실행)
+            if (c === 0) chgIndic(Number(bseq));
+
+            //왼쪽으로 
+
+        } //sideSlide 함수
+
+        /*////////////////////////////////////////
+        
+            함수명 : chgIndic
+            기능 : 슬라이드 해당 순번의 블릿 class 변경하기
+        
+        ////////////////////////////////////////*/
+
+        var chgIndic = function(n) { //n: 블릿순번
+            $('#btnGroup li').eq(n).addClass('selB').siblings().removeClass('selB');
+        }
+
+        /*////////////////////////////////////////
+        
+            함수명 : autoCallside
+            기능 : 슬라이드 자동실행 함수
+        0
+        ////////////////////////////////////////*/
+        var intcall_side; //인터발 변수
+        var autoCallSide = function() {
+            intcall_side = setInterval(function() {
+                sideSlide(0);
+            }, 2000);
+        }; //autoCallSide 
+
+        /*        
+        -setInterval(function(){자바스크립트 코드;}, 일정시간 간격) : 지속적으로 일정한 시간 간격으로 함수를 호출하여 코드를 실행
+        
+        -setTimeout(function(){자바스크립트 코드;}, 일정시간 간격) : 단 한 번 일정한 시간 간격으로 함수를 호출하여 코드를 실행
+        */
+
+        //이동 슬라이드 최초호출!
+        autoCallSide();
+
+        /*////////////////////////////////////////
+        
+            함수명 : clearAutoSide
+            기능 : 자동넘김 지우기
+        
+        ////////////////////////////////////////*/
+
+        var tcall_side; //타임아웃용 변수
+        var clearAutoSide = function() {
+            //인터발 지우기 (setInterval(자동실행)이 들어간 함수 선택)
+            clearInterval(intcall_side);
+
+            //타임아웃 지우기
+            clearTimeout(tcall_side);
+
+            //타임아웃 세팅 - 인터발 재가동!
+            tcall_side = setTimeout(function() {
+                autoCallSide();
+            }, 2000);
+        };
+
+
+        //이동버튼 클릭 시 이동하기
+
+        var bseq; //블릿 순번 
+        $(function() {
+            $('.abtn').click(function(e) {
+
+                e.preventDefault(); //기본이동 막기
+
+                var idx = $(this).index('.abtn');
+                //index(제한조건) : 제한조건 내의 자신 요소 순번 리턴
+                //왼쪽 버튼 : 0(false), 오른쪽 버튼 : 1(true)
+                console.log(idx);
+
+                var tg = $('#viewer');
+
+                if (idx) { //idx : 1이면 true (오른쪽 버튼)
+                    sideSlide(1);
+                } else { //idx : 0이면 false (왼쪽 버튼)
+                    //1.맨 뒤 li를 맨 앞으로 이동
+                    //동시에 left값을 -100%로 변경 (잘라온 li가 보여야 하므로!)
+                    tg.prepend(tg.find('li').last()).css({
+                            left: '-100%'
+                        })
+                        //2. left값을 0으로 애니메이션 (제자리로!)
+                        .animate({
+                            left: '0'
+                        }, 600); //animate
+
+                    //왼쪽 버튼을 클릭했을 때도 자동 호출 지우기
+                    clearAutoSide();
+
+                    //왼쪽 이동시 블릿 순번은 앞으로 이동후 항상 첫번째!!
+                    bseq = tg.find('li').eq(0).attr('data-seq');
+                    
+                } //if else문
+
+                //블릿변경 호출하기
+                chgIndic(Number(bseq));
+                console.log('블릿순번 : '+ bseq);
+            }); //click
+        }); //jQuery
+    </script>
+</head>
+
+<body>
+    <div id="slider">
+        <ul id="viewer">
+            <li data-seq="0"><a href="#"><img src="image/slide1.jpg" alt=""></a></li>
+            <li data-seq="1"><a href="#"><img src="image/slide2.jpg" alt=""></a></li>
+            <li data-seq="2"><a href="#"><img src="image/slide3.jpg" alt=""></a></li>
+            <li data-seq="3"><a href="#"><img src="image/slide4.jpg" alt=""></a></li>
+        </ul>
+        <ul id="btnGroup">
+            <li class="selB"><a href="#"><span>블릿</span></a></li>
+            <li><a href="#"><span>블릿</span></a></li>
+            <li><a href="#"><span>블릿</span></a></li>
+            <li><a href="#"><span>블릿</span></a></li>
+        </ul>
+
+        <span class="abtn btnL"></span>
+        <span class="abtn btnR"></span>
+    </div>
+</body></html>

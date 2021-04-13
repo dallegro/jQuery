@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>08_hasClass()</title>
+    
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        //hasClass() : 선택한 요소에 지정한 클래스가 있으면 'true', 없으면 'false' 반환
+        //기본형 : $("요소선택").hasClass("class명");
+    
+        $(function(){
+            $('button').click(function(){
+                alert($('p').hasClass('intro'));
+            });
+            
+        });
+    
+    </script>
+</head>
+<body>
+    <h1>This is a heading.</h1>
+    
+    <p class="intro">This is a paragraph.</p>
+    <p>This is another paragraph.</p>
+    
+    <button>Check the "intro" class!</button>
+</body>
+</html>

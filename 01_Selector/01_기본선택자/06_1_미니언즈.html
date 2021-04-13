@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>06_1_미니언즈</title>
+
+    <script src=jquery-1.7.2.min.js></script>
+
+    <script>
+        //html()메서드 - 선택한 요소의 하위요소를 가져와 문자열로 반환하거나 하위요소를 전부 제거하고 새 요소로 바꿀 때 사용
+        //$("요소선택").html(); - 선택한 요소의 하위요소를 가져와 문자열로 
+        //html(태그)
+
+        //예제
+        $(document).ready(function() {
+
+            //각 li에 미니언즈 이미지를 이미지 태그로 html에 넣고, 이미지 크기를 width:100px로 고정
+
+            $('#first').html('<img src="image/mini01.png" alt="미니언즈1">');
+            $('#second').html('<img src="image/mini02.jpg" alt="미니언즈2">');
+            $('#third').html('<img src="image/mini03.jpg" alt="미니언즈3">');
+
+            //이미지 크기 고정하기
+            $('.list img').css('width', '100px');
+
+
+            //2. 각 이미지 클릭 시 이미지 크기가 클릭할 때마다 10px씩 커지게 함과 동시에 한번은 오른쪽, 한번은 왼쪽으로 10도씩 기울어지게 애니메이션 적용
+
+            var degs = 10; //각도변경용 변수
+            $('.list img').click(function() {
+
+                var cw = $(this).css('width'); //100px
+                cw = parseInt(cw); //100, parseInt()를 통해 단위를 제거하고 정수 반환!
+                console.log("클릭된 이미지 크기: " + cw);
+
+                //10px씩 커지도록 하기
+                cw += 10;
+                console.log("계산된 width: " + cw);
+
+                //클릭된 이미지 크기변경
+                $(this).css({
+                    width: cw + 'px',
+                    transform: 'rotate(' + degs + 'deg)',
+                    transition: 'all .3s'
+                });
+
+                //각도 변경 셋팅 - 삼항조건 연산자
+                //삼항조건연산자 : 조건식? 자바스크립트 코드1:자바스크립트 코드2;
+                degs === 10 ? degs = -10 : degs = 10;
+
+
+            }); //click()
+
+        }); //jQuery
+    </script>
+
+    <style>
+        /*img {
+            transform: rotate(30deg);
+            "rotate(30deg)"
+        }*/
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <header>
+            <h2>Welcome</h2>
+            <p>Minions friends!</p>
+        </header>
+
+        <nav>
+            <ul class="list">
+                <li id="first">One</li>
+                <li id="second">Two</li>
+                <li id="third">Three</li>
+            </ul>
+        </nav>
+
+        <p>Hava a nice day~!!</p>
+    </div>
+</body></html>

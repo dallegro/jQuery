@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>02_animate()</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            $('button').click(function(){
+                /*$('div').animate({
+                    height: 300,
+                    opacity: 0.4
+                }, 1000);
+                
+                $('div').animate({
+                    width: 300,
+                    opacity: 0.8
+                },1000);
+                
+                $('div').animate({
+                    height: 100,
+                    opacity: 0.4
+                }, 1000);
+                
+                $('div').animate({
+                    width: 100,
+                    opacity: 0.8
+                });*/
+                
+                //animate 메서드 연결
+                $('div').animate({
+                    height: 300,
+                    opacity: 0.4
+                },1000).animate({
+                    width: 300,
+                    opacity: 0.8
+                },1000).animate({
+                    height: 100,
+                    opacity: 0.4
+                },1000).animate({
+                    width: 100,
+                    opacity: 0.8
+                },1000);
+                
+                
+            }); //click
+            
+        }); //jQuery
+        
+    </script>
+</head>
+<body>
+   <button>Start Animation</button>
+   <p>box의 height값과 width값을 변경시키면서 애니메이션 하시오.</p>
+   
+   <div style="width: 100px; height: 100px;background-color: darkseagreen;"></div>
+</body>
+</html>

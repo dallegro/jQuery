@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <title>04_animate()_stop</title>
+
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        /* stop() : 현재 실행중인 효과를 모두 정지
+            - 큐Queue에 등록된 애니메이션을 실행 중간에 멈출 때 사용
+            
+            *기본형
+            (1) $("요소선택").stop();
+            (2) $("요소선택").stop(clearQueue, finish);
+                >>stop(큐 비울래?, 끝으로 갈래?);
+                >>stop(true/false, true/false);
+
+            (1) 진행중인 첫 번째 애니메이션 정지, 큐에 대기중인 애니메이션은 계속해서 실행
+            (2) clearQueue, finish 는 true/false 값을 입력할 수 있으며 기본값은 false
+            clearQueue가 true일 경우 : 큐에서 대기중인 애니메이션을 모두 제거
+            finish가 true일 경우 : 진행중인 애니메이션을 강제로 종료
+            
+            */
+
+        $(function() {
+
+            //a태그의 이동 막기
+            $('a').click(function(e) {
+                e.preventDefault();
+                // 이벤트 전달변수(이벤트객체)와 함께 사용되며 대상요소의 기본 기능 차단
+            });
+
+
+            //첫번째 버튼 클릭시//////////////////////
+            $('#startbtn1').click(function() {
+                $('#box1')
+                    .animate({
+                        opacity: "0.1",
+                        left: "500"
+                    }, 1000)
+                    .animate({
+                        opacity: "0.4",
+                        top: "0",
+                        left: "0",
+                        width: "100",
+                        height: "100"
+                    }, 1000)
+                    .slideUp(1000)
+                    .slideDown(1000)
+                    .animate({
+                        left: "0",
+                        opacity: "1"
+                    }, 1000);
+            });
+            //첫번째 박스 멈춤
+            $('#stopbtn1').click(function() {
+                $('#box1').stop(true, true);
+                //큐 비울래? 응(true), 끝으로 갈래? 응(true)
+            });
+
+
+            //두번째 버튼 클릭시//////////////////////
+            $('#startbtn2').click(function() {
+                $('#box2')
+                    .animate({
+                        opacity: "0.1",
+                        left: "500"
+                    }, 1000)
+                    .animate({
+                        opacity: "0.4",
+                        top: "0",
+                        left: "0",
+                        width: "100",
+                        height: "100"
+                    }, 1000)
+                    .slideUp(1000)
+                    .slideDown(1000)
+                    .animate({
+                        left: "0",
+                        opacity: "1"
+                    }, 1000);
+            });
+            //두번째 박스 멈춤
+            $('#stopbtn2').click(function() {
+                $('#box2').stop(true, false);
+                //큐 비울래? 응(true), 끝으로 갈래? 아니(false)
+                //현재 애니메이션 되던 곳에서 멈춰짐, 효과시작을 누르면 현재 모습, 현재 위치에서 다시 처음부터 시작됨
+            });
+
+
+            //세번째 버튼 클릭시//////////////////////
+            $('#startbtn3').click(function() {
+                $('#box3')
+                    .animate({
+                        opacity: "0.1",
+                        left: "500"
+                    }, 1000)
+                    .animate({
+                        opacity: "0.4",
+                        top: "0",
+                        left: "0",
+                        width: "100",
+                        height: "100"
+                    }, 1000)
+                    .slideUp(1000)
+                    .slideDown(1000)
+                    .animate({
+                        left: "0",
+                        opacity: "1"
+                    }, 1000);
+            });
+            //세번째 박스 멈춤
+            $('#stopbtn3').click(function() {
+                $('#box3').stop(false, true);
+                //큐 비울래? 아니(false), 끝으로 갈래? 응(ture)
+            });
+
+
+            //네번째 버튼 클릭시//////////////////////
+            $('#startbtn4').click(function() {
+                $('#box4')
+                    .animate({
+                        opacity: "0.1",
+                        left: "500"
+                    }, 1000)
+                    .animate({
+                        opacity: "0.4",
+                        top: "0",
+                        left: "0",
+                        width: "100",
+                        height: "100"
+                    }, 1000)
+                    .slideUp(1000)
+                    .slideDown(1000)
+                    .animate({
+                        left: "0",
+                        opacity: "1"
+                    }, 1000);
+            });
+            //네번째 박스 멈춤
+            $('#stopbtn4').click(function(){
+                $('#box4').stop(false, false);
+                //큐 비울래? 아니(false), 끝으로 갈래? 아니(false)
+                
+                //stop() >> true, false의 값을 넣지 않으면
+                //stop(false, false)가 기본으로 적용됨!
+            });
+
+
+
+
+        }); //jQuery
+    </script>
+
+    <style>
+        body {
+            margin-bottom: 300px;
+        }
+        div {
+            margin-bottom: 50px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        #box1 {
+            background: #f00;
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+
+        #box2 {
+            background: #0f0;
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+
+        #box3 {
+            background: #f0f;
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+
+        #box4 {
+            background: #0ff;
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+
+    <p>
+        효과순서<br>
+        .animate({opacity: "0.1", left: "500"}, 1000)<br>
+        .animate({opacity: "0.4", top: "0", left: "0", width: "100", height: "100"}, 1000)<br>
+        .slideUp(1000)<br>
+        .slideDown(1000)<br>
+        .animate({left: "0", opacity: "1" }, 1000)
+    </p>
+
+    <a href="#" id="startbtn1">효과시작</a>&nbsp;&nbsp;<a href="#" id="stopbtn1">stop(true, true)</a>
+    <div id="box1"></div>
+
+    <a href="#" id="startbtn2">효과시작</a>&nbsp;&nbsp;<a href="#" id="stopbtn2">stop(true, false)</a>
+    <div id="box2"></div>
+
+    <a href="#" id="startbtn3">효과시작</a>&nbsp;&nbsp;<a href="#" id="stopbtn3">stop(false, true)</a>
+    <div id="box3"></div>
+
+    <a href="#" id="startbtn4">효과시작</a>&nbsp;&nbsp;<a href="#" id="stopbtn4">stop(false, false)</a>
+    <div id="box4"></div>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

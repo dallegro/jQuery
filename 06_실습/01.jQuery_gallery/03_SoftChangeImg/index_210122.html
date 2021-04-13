@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>fadeInOut</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        /*fade 효과원리
+        1. 1번 이미지가 먼저 보여지도록 z-index값을 1로 세팅 (active클래스 사용)
+        2. 2번 이미지를 display:none으로 만든 후 >> hide()
+           z-index값을 1로 만들어 준다. (active클래스 사용) >> addClass()
+        3. 2번 이미지를 서서히 나타나게 한다. >> fadeIn()
+        4. 1번 이미지를 잘라서 맨 뒤로 이동시킨다. >> append()
+            
+        **1번 이미지가 맨 뒤로 가면서 2번 이미지가 자동으로 1번이 됨
+        
+        */
+    
+        
+        var autocall; //인터발용 변수
+        
+        $(function(){
+            //$('.fadeShow').click(fadeImg);
+            
+            //3초 간격으로 이미지 변경함수 호출
+            autocall = setInterval(fadeImg, 3000);
+            
+            //hover(함수1, 함수2) -> 마우스오버시 함수1, 마우스아웃시 함수2 실행
+            $('.fadeShow').hover(function(){
+                clearInterval(autocall);
+            },function(){
+                autocall = setInterval(fadeImg, 3000); //함수 자동실행 재설정
+            }); //hover
+            
+        });
+    
+    
+        
+        /*//////////////////////////////////////////////////
+        
+            함수명 : fadeImg
+            기능 : 이미지를 순서대로 넘겨서 fade효과를 준다.
+        
+        /*////////////////////////////////////////////////*/
+        
+        function fadeImg(){
+            
+            var fimg = $('.fadeShow img').first(); //1번 이미지
+            var nimg = fimg.next(); //2번 이미지
+            
+            //2번 이미지를 display:none으로 만든 후 >> hide()
+            nimg.hide()
+            
+            //z-index값을 1로 만들어 준다. (active클래스 사용) >> addClass()
+            .addClass('active')
+            
+            //2번 이미지를 서서히 나타나게 한다. >> fadeIn()
+            .fadeIn(800, function(){ //fadeIn 후에 실행
+                //1번 이미지를 잘라서 맨 뒤로 이동시킨다. >> append()
+                $('.fadeShow').append(fimg);
+                
+                //동시에 z-index를 삭제한다
+                fimg.removeClass('active');
+            });
+            
+        } //fadeImg() 함수
+    
+    
+    
+    
+    </script>
+    
+    
+    <style>
+    
+        body {
+            width: 620px;
+            margin: 20px auto;
+            padding: 0;
+            background: #192839;
+        }
+        .fadeShow {
+            width: 600px;
+            height: 350px;
+            background: #666;
+            border: 2px solid #fdf6dd;
+        }
+        .fadeShow img {
+            position: absolute;
+        }
+        .fadeShow .active {
+            z-index: 1;
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <div class="fadeShow">
+        <img class="active" src="slide1.jpg" alt="image1">
+        <img src="slide2.jpg" alt="image2">
+        <img src="slide3.jpg" alt="image3">
+    </div>
+</body>
+</html>

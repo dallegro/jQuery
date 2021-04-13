@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery flexible</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            widows: 100%;
+            height: 100%;
+        }
+
+        body {
+            background-color: #000;
+        }
+
+        .title {
+            font: bold 3.2em arial;
+            text-align: center;
+            color: #fff;
+            margin-top: 100px;
+        }
+
+        #gallery {
+            width: 950px;
+            margin: 50px auto;
+            outline: 2px solid lime;
+            overflow: hidden;
+        }
+
+        /*갤러리 트랙*/
+
+        .gal {
+            width: 25%;
+            margin: 0;
+            float: left;
+        }
+
+        /*각 갤러리 박스 공통*/
+        .photobox {
+            width: 94.5%;
+            height: 250px;
+            margin: 10px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photobox img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .cover {
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0.5;
+        }
+
+        .txt {
+            width: 100%;
+            height: 30%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            /*안보이게 멀리 보냄 %50*/
+            text-align: center;
+            white-space: nowrap;
+            font: 0.75rem/4.375rem "맑은 고딕", "굴림";
+
+        }
+    </style>
+
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script>
+        //이미지 설명글 전역변수 셋팅
+        var msg = []; //배열변수 선언
+
+        //배열변수 값 세팅
+        for (var i = 0; i < 50; i++) {
+            msg[i] = 'WOD18-0' + (i + 1);
+        }
+
+        //트랙구분번호
+        var arrNo = 1;
+
+        $(function() {
+            //1. .photobox에 html 생성 및 캡션 글 셋팅
+            //html에 height값이 랜덤으로 생성
+            for (var i = 0; i < 50; i++) {
+                /*랜덤수 만들기(height값 생성)
+                
+                1~5 사이의 랜덤수:
+                Math.ceil(Math.random()*5)
+                
+                50~250 사이의 랜덤수 >> 1*50(50) ~ 5*50(250)
+                Math.ceil(Math.random()*50)*50
+                
+                250~450 사이의 랜덤수 >> 50+200 ~ 250+200
+                Math.ceil(Math.random()*5)*50+200
+                */
+
+
+                //height 250px~450px이 랜덤으로 생성
+                var ranNo = Math.ceil(Math.random() * 5) * 50 + 200;
+                console.log('랜덤 높이값: ' + ranNo);
+
+                $('.g' + arrNo).append(
+                    '<div class="photobox" style="height: ' + ranNo + 'px">' + '<img src="images/dress/' + (i + 1) + '.jpg"alt="fashion">' + '<span class="cover"></span>' + '<span class=txt>' + msg[i] + '</span>' + '</div>'
+                );
+
+                //트랙번호 증가하기
+
+                arrNo++;
+                if (arrNo === 5) arrNo = 1; //한계수
+
+
+            } ///for문
+
+            //2. 포토박스에 마우스 오버/아웃시 변경 효과주기
+            //대상: .photobox
+            //기능 : 오버시 커버가 사라지고 글박스가 하단에서 올라오는 애니메이션 효과, 아웃시엔 원상복귀
+
+            $('.photobox').hover(
+                function() {
+                    $('.cover', this).stop().fadeOut(200);
+                    $('.txt', this).stop().animate({
+                        top: '70%'
+                    }, 300);
+                },
+                function() {
+                    $('.cover', this).fadeIn(200);
+                    $('.txt', this).stop().animate({
+                        top: '100%'
+                    }, 300);
+                }); //hover
+
+        })
+    </script>
+
+
+</head>
+
+<body>
+
+    <h1 class="title">Fashion Gallery</h1>
+
+    <!--갤러리박스-->
+    <div id="gallery">
+        <div class="gal g1">
+            <!--jQuery 추가-->
+            <!--<div class="photobox">
+                <img src="images/dress/1.jpg" alt="">
+                <span class="cover"></span>
+                <span class="txt">1번</span>
+            </div>-->
+        </div>
+        <div class="gal g2">
+
+            <!--<div class="photobox">
+                <img src="images/dress/2.jpg" alt="">
+                <span class="cover"></span>
+                <span class="txt">2번</span>
+            </div>-->
+        </div>
+        <div class="gal g3">
+
+            <!--<div class="photobox">
+                <img src="images/dress/3.jpg" alt="">
+                <span class="cover"></span>
+                <span class="txt">3번</span>
+            </div>-->
+        </div>
+        <div class="gal g4">
+
+            <!--<div class="photobox">
+                <img src="images/dress/4.jpg" alt="">
+                <span class="cover"></span>
+                <span class="txt">4번</span>
+            </div>-->
+        </div>
+    </div>
+</body>
+
+</html>

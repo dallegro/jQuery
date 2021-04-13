@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>07_example_remove() </title>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            /*
+		remove() 메서드
+        - 선택요소를 제거함
+        
+        [ 추가 메서드 소개 ]
+        attr(속성명,속성값) - 속성값을 변경하는 메서드
+        JS의 setAttribute(속성명,속성값)
+        참고로 속성값을 읽어오려면 JS getAttribute(속성명)
+        으로 사용하였음.
+        제이쿼리는 같은 이름의 메서드로 사용할 수 있음
+        -> attr(속성명) - 파라미터값을 하나만쓰면 읽어옴
+        
+        */
+
+            // 미션: 풍선 이미지를 클릭하면 이미지가 터지는 이미지로 변경 후 이미지 태그를 제거하시오.
+            $(".container img")
+                .css({
+                    width: "200px",
+                    height: "260px"
+                })
+                .click(function() {
+                    // 1. 이미지 src 변경하기
+                    $(this).attr("src", "image/balloon-burst.jpg")
+                        // 2. 이미지 커지고
+                        .animate({
+                            width: "300px",
+                            height: "360px"
+                        }, 100, function() { // 애니후
+                            //3. 풍선태그 사라짐!
+                            $(this).remove();
+                        }); ////// animate /////////////
+                }); /////// click ////////////////////
+
+
+
+        }); //////// jQB ////////////////////////////
+    </script>
+
+</head>
+
+<body>
+
+
+    <div class="container">
+        <img src="image/balloon_blue.png" alt="파란풍선">
+        <img src="image/balloon_green.png" alt="녹색풍선">
+        <img src="image/balloon_red.png" alt="빨간풍선">
+    </div>
+
+
+
+</body></html>
+

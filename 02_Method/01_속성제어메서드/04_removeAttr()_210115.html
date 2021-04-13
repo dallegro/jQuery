@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>04_removeAttr()</title>
+    
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        //removeAttr() : 선택한 요소에서 기존의 속성을 삭제할 때 사용
+        //기본형 : $("요소선택").removeAttr("속성");
+    
+        $(document).ready(function(){
+            $('button#btn1').click(function(){
+               $('p').removeAttr('style'); 
+            });
+            
+            $('button#btn2').click(function(){
+                $('img').removeAttr('title');
+            });
+        });
+    
+    
+    </script>
+</head>
+<body>
+    <h1>This is a heading.</h1>
+    
+    <p style="font-size: 120%; color: red;">This is a paragraph.</p>
+    <p style="font-weight: bold; color: blue;">This is another paragraph.</p>
+    
+    <div>
+        <img src="image/sea.jpg" alt="sea" title="여름엔 바다지!!!">
+    </div>
+    
+    <button id="btn1">Remove the style</button>
+    <button id="btn2">Remove the title</button>
+</body>
+</html>

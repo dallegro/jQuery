@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>05_animate()_easing</title>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script src="jquery-ui-1.8.23.custom.min.js"></script>
+    <script>
+        /*이징(easing) 효과란?
+        -애니메이션 시작과 끝에 가속도를 변경해주는 옵션
+        -이징효과를 주려면 반드시 jQuery UI를 상단에 넣어야 함!
+        -이징 효과는 그 효과명을 정확히 표기해야 적용된다.
+        
+        */
+        
+        $(function(){
+            //기능구현 : 버튼을 클릭할 때 버튼의 text의 이징명으로 slideUp, slideDown 효과에 지정하시오.
+            
+            $('button').click(function(){
+                //button의 이징명을 읽어오기
+                var easing = $(this).text();
+                console.log(easing);
+                
+                $('#box').slideUp(800, easing, function(){
+                    $(this).slideDown(800,easing);
+                });
+            });
+            
+            
+            
+            
+            
+        });
+    </script>
+</head>
+
+<body>
+    <div id="box">
+        <img src="ease.jpg" alt="">
+    </div>
+
+    <button>easeOutQuart</button>
+    <button>easeInOutElastic</button>
+    <button>easeOutBack</button>
+    <button>easeOutBounce</button><br>
+
+    <button>easeInOutExpo</button>
+    <button>easeInOutSine</button>
+    <button>easeOutCubic</button>
+    <button>easeOutCirc</button><br>
+
+    <button>easeOutQuad</button>
+    <button>easeInOutQuint</button>
+    <button>easeInOutCirc</button>
+    <button>easeInCubic</button>
+
+
+
+
+
+
+
+</body>
+
+</html>

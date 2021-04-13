@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>font-size</title>
+    <style>
+        .parent {
+            margin-bottom: 50px;
+        }
+
+        .parent,
+        .parent2 {
+            font-size: 30px;
+        }
+
+        .parent .box {
+            font-size: 1.2em;
+            /*50*1.2 = 36px*/
+        }
+
+        .parent .box span {
+            font-size: 1.2em;
+            /*30*1.2 = 43.2px*/
+        }
+        .parent2 .box2 {
+            font-size: 1.2rem;
+        }
+        .parent2 .box2 span {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="box">
+            내가 바로 em!!!
+            <span>나도 em!!!</span>
+        </div>
+    </div>
+    <div class="parent2">
+        <div class="box2">
+            내가 바로 rem!!!
+            <span>나도 rem!!!</span>
+        </div>
+    </div>
+</body>
+
+</html>

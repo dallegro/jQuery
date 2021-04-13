@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>02_jQuery_event</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        function haha() {
+            alert("나 불렀어????????");
+        }
+    
+        $(function(){
+            $('div').click(haha);
+        }); //jQuery
+    
+    
+    </script>
+    
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: #fc9;
+        }    
+    </style>
+</head>
+<body>
+    <div id="box">클릭</div>
+</body>
+</html>

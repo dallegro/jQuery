@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>05_slideToggle</title>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        //slideToggle() : slideUp(), slideDown() 효과를 적용
+        
+        //미션 : slideToggle을 사용하여 이미지가 올라가면서 감춰지고, 내려오면서 보여지게 하시오.
+        
+        $(function(){
+            $('button').click(function(){
+                $('div').slideToggle(1000,"linear");
+            });
+            
+            
+        });
+    
+    </script>
+</head>
+<body>
+    
+    <div>
+        <img src="home1.jpg" alt="">
+    </div>
+    <button>slideToggle</button>
+    
+</body>
+</html>

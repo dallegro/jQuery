@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>02_append()</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        //append(), appendTo() : 선택한 요소 내의 마지막 위치에 새 요소를 생성하고 추가
+        //$("요소선택").append("새 요소");
+        //$("새 요소").appendTo("요소선택");
+        
+        //예제1
+        $(function(){
+            $('<li>내가 마지막 리스트 appendTo!</li>').appendTo('#listZone');
+            
+        });
+        
+        //예제2
+        $(function(){
+            
+            $('#container').click(function(){
+                //#container의 마지막 위치에 p태그 생성
+                $(this).append('<p>펜트하우스</p>');
+                //클릭할 때마다 요소 생성
+                
+                //추가미션 : '맨뒤로 가!" 버튼을 클릭하면 맨 앞의 p태그를 선택, 맨 뒤로 이동시키시오.
+                $('#btngo').click(function(){
+                    //$('#container').append($('#container>p:first'));
+                    //$('#container').append($('#container>p').first());
+                    //$('#container>p').first().appendTo('#container');
+                    $('#container>p:first').appendTo('#container');
+                });
+                
+                
+            }); ////click
+            
+            
+            
+        });
+        
+    
+    </script>
+</head>
+<body>
+   <!--예제1-->
+   <ul id="listZone">
+       <li>리스트1</li>
+       <li>리스트2</li>
+       <li>리스트3</li>
+       <li>리스트4</li>
+       <li>리스트5</li>
+   </ul>
+   
+   <!--예제2-->
+   <button id="btngo">맨 뒤로 가~~!!!!</button>
+   <div id="container" style="background-color: greenyellow;">
+       <p style="cursor: default;">최근에 즐겨보는 드라마는 무엇입니까?</p>
+      <!-- <p></p>-->
+   </div>
+    
+    
+    
+    
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>03_attr()</title>
+
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        /*attr() : 선택한 요소에 새 속성을 생성하거나 기존의 속성을 변경할 때, 요소의 속성값을 불러올 때 사용
+        
+        *기본형
+        1) $("요소선택").attr("속성명"); - 선택한 요소의 지정한 속성값 가져오기
+        2) $("요소선택").attr("속성명","새값"); - 요소를 선택해서 지정한 속성값 적용, 단일값 적용
+        3) $("요소선택").attr({"속성명1":"새값1", "속성명2":"새값2"}); - 요소를 선택해서 여러개의 속성값 적용
+        */
+
+        $(function() {
+            //속성값 받아오기
+            //alert($("img").attr("width"));
+
+            $('button').click(function() {
+                //단일 속성 변경
+                //$('img').attr('width','700');
+                //$('img').attr('src','image/mountain.jpg');
+
+                //여러가지 속성 변경
+                $('img').attr({
+                    src: 'image/mountain.jpg',
+                    alt: 'mountain'
+                });
+                alert($('img').attr('alt'));
+            }); //click()
+
+        });
+    </script>
+</head>
+
+<body>
+    <img src="image/sea.jpg" alt="Pulpit Rock" width="500" height="300">
+    <br>
+    <button>Set the width attribute of the image</button>
+</body>
+
+</html>

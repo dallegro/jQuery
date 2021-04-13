@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>01_animate()</title>
+    <script src="jquery-1.12.4.min.js"></script>
+    
+    <script>
+        /*
+        animate({CSS설정}, 시간, 이징easing, 함수);
+        : 선택한 요소에 다양한 동작(Motion)효과 적용
+        : 복합적인 CSS 변경에 따른 애니메이션을 구현
+        : 주의사항 - 적용할 요소의 CSS 설정에 transition이 없어야 한다!
+        : 유의사항 - CSS설정값을 필요에 따라 모두 셋팅해야함!
+        : overflow:hidden 설정이 없어도 애니메이션 진행 중에는 임시로 overflow:hidden이 설정되지만, 부모요소에 overflow:hidden으로 자식요소를 숨겨야 하는 경우 이를 세팅해야 한다! (유의사항 참고)
+        
+        *기본형
+        $("요소선택").animate({스타일속성}, 적용시간, 가속도, 콜백함수);
+        (1) 스타일속성 : 애니메이션으로 적용할 스타일 속성
+        (2) 적용시간 : 동작에 반응하는데 소요되는 시간
+        */
+    
+        $(function(){
+            $('#start').click(function(){
+                $('#box1').animate({
+                    left: "+=100px" //클릭할 때마다 100px씩 증가
+                }, 1000, function(){
+                    console.log('애니메이션 끝!!!');
+                });
+            });
+            
+            
+            //예제2. 버튼 이름에 맞게 애니메이션 하시오. (단, 가로방향으로 숨기고 보이게 할 것)
+            
+            //width값을 조절하여 구현하기
+            /*$('#hide').click(function(){
+                $('#box2').animate({
+                    width: "0"
+                },800);
+            });
+            
+            $('#show').click(function(){
+                $('#box2').animate({
+                    width: "300px"
+                }, 800);
+            });*/
+            
+            
+            //left값을 조절하여 구현하기 
+            $('#hide').click(function(){
+                $('#box2').animate({
+                    left:"-400px"
+                }, 800);
+            });
+            
+            $('#show').click(function(){
+                $('#box2').animate({
+                    left: "0"
+                },800);
+            });
+            
+        }); ///jQuery
+    
+    
+    </script>
+    
+    <style>
+        body {margin-bottom: 300px;}
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: yellowgreen;
+            position: relative;
+        }
+    
+        #box2 {
+            margin-top: 100px;
+            overflow: hidden;
+            position: relative; /*left값 조절을 위한 설정*/
+        }
+    </style>
+</head>
+<body>
+   <!--예제1-->
+   <button id="start">Start Animation</button>
+   <p>box를 오른쪽으로 이동시켜 보세요.</p>
+   
+   <div id="box1"></div>
+   
+   <!--예제2-->
+   <div id="box2">
+       <img src="sample1.jpg" alt="" width="300">
+   </div>    
+   
+   <button id="hide">사진감추기</button>
+   <button id="show">사진보기</button>
+   
+   
+   
+   <!--test-->
+   <!--<div id="test">
+       <img src="sample3.jpg" alt="">
+   </div>
+
+   <style>
+       body {margin-bottom: 500px;}
+       div#test {border: 3px solid red; width: 100px;margin: 20px; overflow: hidden;}
+    </style>
+      -->
+            
+    
+</body>
+</html>

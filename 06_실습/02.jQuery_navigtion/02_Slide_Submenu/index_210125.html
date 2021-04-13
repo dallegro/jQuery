@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>slide Menu</title>
+        
+        <script src="jquery-1.12.4.min.js"></script>
+        <script>
+            
+            
+            $(function(){
+                //초기설정 - 서브메뉴 모두 숨기고 첫번째 title의 서브메뉴만 보이게 하기
+                $('.sub').hide().first().show();
+                
+                
+                //상위요소(.title)을 클릭하면 하위메뉴(.sub)가 slide로 보이게 하고
+                //다른 상위요소(.title)의 하위메뉴(.sub)는 slide로 숨기기
+                
+                $('.title').click(function(){
+                    //클릭된 요소의 하위요소(.sub)를 slideDown(또는 slideUp)
+                    $(this).next().slideToggle(500)
+                    
+                    //부모(li)로 올라가서 다른 형제요소들의 자식(하위요소)인 .sub는 모두 닫을 것
+                    .parent().siblings().find('.sub').slideUp(500);
+                    
+                }); ///click
+                
+                
+                
+                
+                
+            }); //jQuery
+        
+        
+        </script>
+        
+        <style>
+            body {
+                width: 200px;
+                margin: 20px auto;
+                padding: 0;
+                font-size: 14px;
+            }
+            ul {
+                list-style:none;
+                margin: 0;
+                padding: 0;
+            }
+            ul#navi {
+                width: 200px;
+                text-indent: 10px;
+            }
+            li.group {
+                margin-bottom: 5px;
+            }
+            a {
+                text-decoration: none;
+            }
+            a.title {
+                width: 100%;
+                background: #9ab92e;
+                display: block;
+                height: 40px;
+                line-height: 40px;
+                font-weight: bold;
+                color: black;
+            }
+            ul.sub li {
+                height: 40px;
+                line-height: 40px;
+                background : #fdf6dd;
+                margin-bottom: 2px;
+            }
+            ul.sub li a {
+                color: #000;
+                display: block;
+                /*background-color: hotpink;*/
+            }
+            ul.sub li:hover {
+                background: #ccff00;
+            }
+        
+        </style>
+    </head>
+    <body>
+        <ul id="navi">
+            <li class="group">
+                <a href="#" class="title">Title 1</a>
+                <ul class="sub">
+                    <li><a href="#">Sub1</a></li>
+                    <li><a href="#">Sub2</a></li>
+                    <li><a href="#">Sub3</a></li>
+                </ul>
+            </li>
+            <li class="group">
+                <a href="#" class="title">Title 2</a>
+                <ul class="sub">
+                    <li><a href="#">Sub1</a></li>
+                </ul>
+            </li>
+            <li class="group">
+                <a href="#" class="title">Title 3</a>
+                <ul class="sub">
+                    <li><a href="#">Sub1</a></li>
+                    <li><a href="#">Sub2</a></li>
+                </ul>
+            </li>
+            <li class="group">
+                <a href="#" class="title">Title 4</a>
+                <ul class="sub">
+                    <li><a href="#">Sub1</a></li>
+                    <li><a href="#">Sub2</a></li>
+                    <li><a href="#">Sub3</a></li>
+                    <li><a href="#">Sub4</a></li>
+                    <li><a href="#">Sub5</a></li>
+                    <li><a href="#">Sub6</a></li>
+                </ul>
+            </li>
+            <li class="group">
+                <a href="#" class="title">Title 5</a>
+                <ul class="sub">
+                    <li><a href="#">Sub1</a></li>
+                    <li><a href="#">Sub2</a></li>
+                    <li><a href="#">Sub3</a></li>
+                </ul>
+            </li>
+        </ul>
+    </body>
+</html>

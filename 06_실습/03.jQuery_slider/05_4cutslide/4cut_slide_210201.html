@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>4cut_slide</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }    
+        
+        button {
+            background-color: lightgray;
+            padding: 10px;
+            font-size: 20px;
+            border-radius: 6px;
+            color: white;
+            float: left;
+            margin-right: 10px;
+            position: relative;
+            top: 120px;
+        }
+        
+        #slider {
+            position: relative;
+            float: left;
+            overflow: hidden;
+            /*background-color: greenyellow;*/
+        }
+        .container {
+            position: absolute;
+            overflow: hidden;
+            /*width: 3000px;
+            height: 300px;*/
+        }
+        .item {
+            float: left;
+            border: 5px solid lightgray;
+            margin-right: 10px;
+            box-sizing: border-box;
+        }
+        .item h1 {
+            text-align: center;
+        }
+    
+    
+    
+    </style>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        //css 설정 -slider:width/height, img:width, item:border-color
+    
+        $(function(){
+            var width = $('#slider').attr('data-width'); //1000
+            var height = $('#slider').attr('data-height'); //300
+            var count = $('#slider .item').length; //6개
+            
+            console.log('width: '+width);
+            console.log('height: '+height);
+            console.log('count: '+count);
+            
+            
+            //#slider 크기 조절
+            $('#slider').css({
+                width: width,
+                height: height
+            })
+            .find('.container').css({
+                width: count * width, //item갯수 * width, 6*1000=6000
+                height: height
+            })
+            .find('.item').css({
+                width: width / 4 -10,
+                height: height
+            });
+            
+            
+            //border, img 조절
+            $('.item img').css({
+                'max-width': width / 4 - 20, //1000/4-20 >> 230
+            });
+            $('.item:odd').css('border', '5px solid skyblue');
+            //odd는 홀수, index 번호 기준으로 선택됨
+            //index 1, 3, 5에 변경된 border 적용
+            
+            
+            //한 칸씩 슬라이드 이동하기
+            
+            var currentPage = 0;
+            var changePage = function(){
+                $('#slider>.container').animate({
+                    left: -(currentPage * width) / 4
+                });
+            } //changePage
+            
+            $('#left-button').click(function(){
+                if(currentPage > 0){
+                    currentPage = currentPage -1; //1씩 감소
+                    changePage();
+                }
+            }); //left-button 
+            
+            $('#right-button').click(function(){
+                if(currentPage < count - 4){
+                    currentPage = currentPage +1; //1씩 증가
+                    changePage();
+                }
+            });
+            
+            
+            
+        }); //jQuery
+    
+    
+    </script>
+</head>
+
+<body>
+    <!--prevBtn-->
+    <button id="left-button">&lt;</button>
+
+    <div id="slider" data-width="1000" data-height="300">
+        <div class="container">
+            <div class="item">
+                <h1>1 photo</h1>
+                <img src="img/trip1.jpg" alt="">
+            </div>
+            
+            <div class="item">
+                <h1>2 photo</h1>
+                <img src="img/trip2.jpg" alt="">
+            </div>
+            
+            <div class="item">
+                <h1>3 photo</h1>
+                <img src="img/trip3.jpg" alt="">
+            </div>
+            
+            <div class="item">
+                <h1>4 photo</h1>
+                <img src="img/trip4.jpg" alt="">
+            </div>
+            
+            <div class="item">
+                <h1>5 photo</h1>
+                <img src="img/trip1.jpg" alt="">
+            </div>
+            
+            <div class="item">
+                <h1>6 photo</h1>
+                <img src="img/trip2.jpg" alt="">
+            </div>
+            
+        </div>
+    </div>
+
+    <!--nextBtn-->
+    <button id="right-button">&gt;</button>
+</body>
+
+</html>

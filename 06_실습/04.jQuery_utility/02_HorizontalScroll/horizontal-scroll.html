@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>horizontal-scroll</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        #wrap {
+            width: 800px;
+            /*outline: 3px solid red;*/
+            overflow: hidden
+        }
+
+        #content {
+            height: 440px;
+            position: relative;
+        }
+
+        #scrollBar {
+            width: 800px;
+            height: 30px;
+            background-color: darkseagreen;
+        }
+
+        #bar {
+            width: 60px;
+            height: 30px;
+            background-color: orange;
+        }
+    </style>
+
+    <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="jquery-ui.min.js"></script>
+
+    <script>
+        $(function() {
+            //스크롤바 드래그 설정하여 움직이기 = 비례식
+            $('#bar').draggable({
+                axis: 'x', //x축 고정
+                containment: 'parent' //작동 범위를 부모 요소로 한정됨
+            });
+
+            //위치값 설정
+            var barmax = 740; //바의 최대 이동값 = 전체 너비 800px-스크롤너비 60px
+            var barpos; //바의 이동값
+
+            var imgmax = 480; //사진 최대 이동값, 이미지크기 1280px-보여지는 크기 800
+            var imgpos; //사진 이동값
+
+            /*
+            바가 이동할 때 사진 이동시키기(비례식 세우기)
+            
+            바의 최대 이동값 : 바 이동값 = 사진 최대 이동값 : 사진 이동값
+            imgpos = barpos * imgmax /barmax
+            */
+
+            //바를 드래그할 때 이벤트 발생!
+            $('#bar').bind('drag', function() {
+                barpos = $(this).offset().left; //현재 bar의 이동값
+                console.log(barpos);
+
+                //사진 이동값 = 바 이동값 * 사진 최대 이동값 / 바의 최대 이동값 
+                imgpos = barpos * imgmax / barmax
+                console.log('사진 이동값 : ' + imgpos);
+
+                $('#content').css({
+                    left: -imgpos + 'px'
+                });
+            });
+        }); //jQuery
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="content">
+            <img src="pg_new.jpg" alt="suzy">
+        </div>
+
+        <div id="scrollBar">
+            <div id="bar"></div>
+        </div>
+    </div>
+</body>
+
+</html>

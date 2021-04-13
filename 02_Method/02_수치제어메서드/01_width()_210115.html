@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>01_width()</title>
+    
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        //width() : 안쪽 여백(padding)과 선(border)을 '제외'한 너빗값을 반환하거나 변환
+        //$("요소선택").width(); / $("요소선택").width(값);
+    
+        $(function(){
+            //var width = $('div').width();
+            console.log($('div').width());
+            
+            $('div').width(450); //width값을 450px로 변경
+            
+            $('button').click(function(){
+                alert($('div').width());
+            });
+        }); ////jQuery
+    
+    </script>
+</head>
+<body>
+    <h1>width()</h1>
+    
+    <div></div>
+    <br>
+    <button>Display the width of div</button>
+    
+    <style>
+        div {
+            width: 300px;
+            height: 100px;
+            padding: 10px;
+            margin: 3px;
+            border: 1px solid blue;
+            background-color: lightblue;
+        }
+    
+    
+    </style>
+</body>
+</html>

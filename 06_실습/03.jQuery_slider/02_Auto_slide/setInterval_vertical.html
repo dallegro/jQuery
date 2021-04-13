@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>setInterval_vertical</title>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="setInterval_vertical.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ol,
+        ul,
+        li {
+            list-style: none;
+        }
+
+        #box {
+            width: 600px;
+            height: 600px;
+            margin: 20px auto;
+            border: 2px solid black;
+            position: relative;
+            /*.btngrp의 기준요소!*/
+            overflow: hidden;
+        }
+
+        #btngrp {
+            height: 30px;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index:1;
+        }
+
+        #btngrp li {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            font-size: 24px;
+            float: left;
+            margin-right: 10px;
+        }
+
+        #btngrp li:last-child {
+            margin-right: 0;
+        }
+
+        #gallery {
+            width: 600px;
+            height: 1800px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #gallery li{
+            width: 600px;
+            height: 600px;
+        }   
+        /*#gallery li img {
+            width: 100%;
+        }*/
+        
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul id="btngrp">
+            <li id="btn0">◆</li>
+            <li id="btn1">◆</li>
+            <li id="btn2">◆</li>
+        </ul>
+        <ul id="gallery">
+            <li><img src="image/item1.jpg" alt=""></li>
+            <!-- n = 0 -->
+            <li><img src="image/item3.jpg" alt=""></li>
+            <!-- n = 1 -->
+            <li><img src="image/item2.jpg" alt=""></li>
+            <!-- n = 2 -->
+            <li><img src="image/item1.jpg" alt=""></li>
+            <!-- n = 3 -->
+        </ul>
+    </div>
+</body></html>

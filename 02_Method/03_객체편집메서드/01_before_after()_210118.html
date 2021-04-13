@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>01_before_after()</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        /*객체 편집 메서드
+        선택한 요소를 복제하거나 새 요소를 생성, 복제하거나 새로 생성한 요소를 의도한 위치에 삽입하고 선택한 요소를 삭제하는 역할
+        
+        1. before(), insertBefore() : 선택한 요소의 이전 위치에 새 요소를 생성
+        $("요소선택").before("새 요소");
+        $("새 요소").insertBefore("요소선택");
+        
+        2. after(), insertAfter() : 선택한 요소의 다음 위치에 새 요소를 생성
+        $("요소선택").after("새 요소");
+        $("새 요소").insertAfter("요소선택");
+        */
+        
+        $(function(){
+            
+            //인덱스 1(내용2) 이전에 새로운 요소 삽입
+            $('#wrap p:eq(1)').before('<p>나는 Before!</p>');
+            //인덱스 0(내용1) 이전에 새로운 요소 삽입
+            $('<p>나는 insertBefore!</p>').insertBefore('#wrap p:eq(0)');
+            
+            /****요소가 추가되면 인덱스 번호가 바뀌게 된다!!!****/
+            
+            $('#wrap p:eq(2)').after('<p>나는 After!</p>');
+            $('<p>나는 insertAfter!</p>').insertAfter('#wrap p:eq(1)');
+            
+        });
+    
+    
+    </script>
+</head>
+<body>
+    <div id="wrap">
+        <p class="red">내용1 (인덱스 0)</p>
+        <p class="red">내용2 (인덱스 1)</p>
+        <p class="red">내용3 (인덱스 2)</p>
+    </div>
+    
+    <style>
+        p.red {color: red; font-weight: bold;}
+    </style>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>01_loadmore</title>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        $(function() {
+
+            //초기설정 - 감춰진 div중 위에서부터 4개만 보이도록 설정
+            $('div').slice(0, 4).show();
+            //slice(n,m) : 배열의 n번 인텍스 원소부터 m번 인덱스번호 전까지 잘라서 반환
+            $('#loadMore').click(function(e) {
+
+                e.preventDefault();
+
+                $('div:hidden').slice(0, 4).slideDown(); //.slideDown() - 슬라이딩 스타일로 요소를 보이게 한다.
+
+                //숨겨진 div 갯수가 0일 때
+                //#loadMore 버튼이 .fadeOut()되면서 서서히 사라짐
+                if ($('div:hidden').length == 0) {
+                    //length - 문자열의 길이를 나타냄
+                    $('#loadMore').fadeOut('slow');
+                }
+
+                $('html,body').animate({
+                    scrollTop: $(this).offset().top
+                }, 1500);
+
+
+            }); //#loadMore.click()
+
+            $('.totop>a').click(function() {
+                $('html,body').animate({
+                    scrollTop: 0
+                }, 300);
+
+            }); //.totop>a.click()
+
+        }); //jQuery
+
+        //스크롤 발생 시 TOP 버튼 보이게 하기
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+                $('.totop>a').stop().fadeIn();
+            } else { //50보다 작으면 실행
+                $('.totop>a').stop().fadeOut();
+            }
+        });
+    </script>
+
+    <style>
+        body {
+            background-color: #f6f6f6;
+            width: 400px;
+            margin: 20px auto;
+            font: normal 13px sans-serif;
+            color: #444;
+        }
+
+        div {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-width: 0 1px 1px 0;
+            border-color: #fff;
+            border-style: solid;
+            box-shadow: 0 1px 1px #ccc;
+            margin-bottom: 5px;
+            display: none;
+        }
+
+        .totop {
+            position: fixed;
+            right: 20px;
+            bottom: 10px;
+        }
+
+        .totop a {
+            display: none;
+            /*display: block;*/
+        }
+
+        a,
+        a:visited {
+            color: #33739e;
+            text-decoration: none;
+            display: block;
+            margin: 10px 0;
+        }
+
+        #loadMore {
+            padding: 10px;
+            text-align: center;
+            background-color: #33739e;
+            color: #fff;
+            border-right: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+            box-shadow: 0 1px 1px #ccc;
+            transition: all 600ms ease-in-out;
+        }
+
+        #loadMore:hover {
+            background-color: #fff;
+            color: #33739e;
+        }
+    </style>
+</head>
+
+<body>
+    <div>Content</div>
+    <div>Content</div>
+    <div>Content</div>
+    <div>Content</div>
+
+    <div>Content</div>
+    <div>Content</div>
+    <div>Content</div>
+    <div>Content</div>
+
+    <div>Content</div>
+    <div>Content</div>
+    <div>Content</div>
+    <div>Content</div>
+
+    <div>Content</div>
+    <div>Content</div>
+    <div>Content</div>
+    <div>Content</div>
+
+    <div>Content</div>
+    <div>Content</div>
+    <div>Content</div>
+    <div>Content</div>
+
+    <div>Content</div>
+    <div>Content</div>
+    <div>Content</div>
+    <div>Content</div>
+
+    <div>Content</div>
+    <div>Content</div>
+    <div>Content</div>
+    <div>내가 마지막~~~!!!!</div>
+    <a href="#" id="loadMore">Load More</a>
+    <p class="totop">
+        <a href="#top">Back to top</a>
+    </p>
+</body>
+
+</html>

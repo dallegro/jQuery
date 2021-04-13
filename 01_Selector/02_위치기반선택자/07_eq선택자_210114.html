@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>07_eq선택자</title>
+    
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        //eq선택자 : 선택한 요소 중 지정한 인덱스가 참조하는 요소만 선택
+        //기본형 : $("요소선택:eq(index)") 또는 $("요소선택").eq(index)
+        
+        //예제1
+        $(function(){
+            $("#menu li:eq(2)").css({
+                backgroundColor: "coral",
+                border: "2px solid blue"
+            });
+            
+            $("#menu li").eq(3).css({
+                backgroundColor:"black",
+                color:"silver"
+            });
+        });
+        
+        
+        //예제2
+        //1)nav li를 클릭 시, 클릭된 li의 글씨크기를 5px씩 커지게 하세요.
+        //동시에 글자색을 무지개색 순서로 차례로 변경되게 하시오.
+        
+        $(function(){
+            //7가지 색상배열 셋팅
+            var color = ["red","orange","yellow","green","blue","skyblue","purple"];
+            
+            var num=0; //무지개색 순번>>인덱스 번호
+            
+            $('.nav li').css({
+                fontSize:"25px",
+                textShadow: "0 0 6px #ff0",
+                cursor: "pointer",
+                width:"300px"
+            })
+            .click(function(){
+                $(this).css({
+                    fontSize:"+=5px", //기존 크기에 5px 증가!
+                    color:color[num]
+                });
+                
+                //무지개색 순번 증가
+                num++;
+                if(num===7) num=0;
+                
+            });///click()
+            
+            //2) 선택박스의 선택(이름)을 변경하는 순간, 배경이미지를 해당 이름과 매칭하여 body에 넣기
+            //동시에 목록(.nav) 이름의 배경색을 무지개색 순번으로 변경
+            
+            
+            $('#selnum').css({
+                fontSize: "32px",
+                height: "50px"
+            })
+            //change()메서드 - change 이벤트 발생할 때 실행
+            .change(function(){
+                //선택된 option의 value값 읽어오기
+                var optval = $(this).val(); //val()메서드는 value값을 가져오는 메서드
+                console.log(optval);
+                
+                //배경이미지 변경
+                $('body').css({
+                    background: "url(img/" + optval + ".jpg) no-repeat center top/cover"
+                });
+                
+                //배경색 초기화
+                $('.nav li').css({
+                    backgroundColor: "transparent"
+                });
+                
+                
+                //대상이 바뀔때마다 무지개색이 순서대로 배경색 넣기
+                $('.nav li:eq(' + optval + ')').css({
+                    backgroundColor: color[num]
+                });
+                
+                //무지개색 순번 증가시키기
+                num++;
+                if(num===7) num=0; //한계값 설정
+                
+                
+            }); ///change()
+            
+            
+        }); ///jQuery
+        
+    
+    
+    
+    
+    </script>
+    
+    <!--<style>
+        body {
+            background: url(img/0.jpg) no-repeat center top/cover;
+        }
+    
+    </style>-->
+</head>
+<body>
+    <!--예제1-->
+    <!--<h1>eq선택자</h1>
+    <ul id="menu">
+        <li>내용1</li>
+        <li>내용2</li>
+        <li>내용3</li>
+        <li>내용4</li>
+        <li>내용5</li>
+    </ul>-->
+    
+    
+    <!--예제2-->
+    
+    <div id="container">
+        
+        <select id="selnum">
+            <option value="tt">배우를 선택하세요.</option>
+            <option value="0">김수현</option>
+            <option value="1">서예지</option>
+            <option value="2">공유</option>
+            <option value="3">아이유</option>
+            <option value="4">이동욱</option>
+            <option value="5">송중기</option>
+            <option value="6">김혜수</option>
+            <option value="7">전지현</option>
+            <option value="8">손예진</option>
+            
+        </select>
+        
+        <ul class="nav">
+            <li>김수현</li>
+            <li>서예지</li>
+            <li>공유</li>
+            <li>아이유</li>
+            <li>이동욱</li>
+            <li>송중기</li>
+            <li>김혜수</li>
+            <li>전지현</li>
+            <li>손예진</li>
+        </ul>
+        
+        
+        
+    </div>
+    
+    
+</body>
+</html>

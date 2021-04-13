@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>1cutslide-2</title>
+        
+        <script src="jquery-1.12.4.min.js"></script>
+        <script src="jquery-ui.min.js"></script>
+        <script>
+        
+            $(function(){
+                //각 버튼을 클릭하면 이미지박스 left값 변경 이동하기
+                $('#btnGroup a').click(function(e){
+                    
+                    e.preventDefault(); //기본이동막기
+                    
+                    //a태그의 부모 li순번 구하기
+                    var idx = $(this).parent().index();
+                    //alert(idx);
+                    
+                    //left값 변경대상 : #viewer
+                    //li의 idx값 0~3은 left 위치값 계산과 일치, 인덱스 활용!
+                    $('#viewer').stop().animate({
+                        left: (-100 * idx) + '%'
+                    },600,'easeInOutQuint');
+                    
+                    
+                }); ////click()
+            }); ////jQuery
+        
+        
+        
+        </script>
+        
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+            }
+            body {
+                background-color: #05184d;
+            }
+            div#slider {
+                width: 1200px;
+                margin: 0 auto;
+                margin-top: 40px;
+                border: 2px solid #fdf6dd;
+                border-bottom: 5px solid #fdf6dd;
+                overflow: hidden;
+                position: relative; /*btnGroup의 기준요소*/
+            }
+            div#viewer {
+                width: 400%;
+                position: relative;
+                left: 0;
+            }
+            div#viewer img {
+                width: 25%;
+                /*#부모인 #viewer를 1/4등분 한 크기*/
+            }
+            
+            
+            #btnGroup {
+                margin: 0;
+                padding: 0;
+                position: absolute;
+                right: 1%;
+                bottom: 2%;
+               /* outline: 3px solid lime;*/
+            }
+            #btnGroup li {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                list-style: none;
+                float: left;
+                margin-right: 6px;
+            }
+            #btnGroup li a {
+                text-decoration: none;
+                text-align: center;
+                background: #fdf6dd;
+                display: block;
+                border-radius: 6px;
+                font-size: 18px;
+                color: #000;
+            }
+            #btnGroup li:last-child {
+                margin-right: 0;
+            }
+            #btnGroup li a:hover {
+                background-color: darkseagreen;
+            }
+            
+        
+        
+        </style>
+    </head>
+    <body>
+        
+        <div id="slider">
+            <div id="viewer">
+                <img id="image1" src="images/illom-slide1.jpg" alt=""><img id="image2" src="images/illom-slide2.jpg" alt=""><img id="image3" src="images/illom-slide3.jpg" alt=""><img id="image4" src="images/illom-slide4.jpg" alt="">
+            </div>
+            
+            <ul id="btnGroup">
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+            </ul>
+        </div>
+        
+    </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>02_fadeToggle()</title>
+        
+        <script src="jquery-1.12.4.min.js"></script>
+        <script>
+            //fadeToggle(시간, 이징, 함수) 메서드
+            //display상태를 파악하여 fadeIn, fadeOut을 전환해 주는 메서드
+        
+            $(function(){
+                $('button').click(function(){
+                    $('img').fadeToggle(1000);
+                });
+            });    
+            
+        </script>
+    </head>
+    <body>
+       <img src="home1.jpg" alt="">
+       <img src="home2.jpg" alt="">
+       <img src="home3.jpg" alt="">
+       <br><br>
+       <button id="btn">fadeToggle</button>
+        
+    </body>
+</html>

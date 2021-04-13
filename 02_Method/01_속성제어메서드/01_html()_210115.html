@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01_html()</title>
+    
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        /*
+        html() 메서드 : 선택한 요소의 하위 요소를 가져와 문자열로 반환하거나 하위 요소를 전부 제거하고 새 요소로 바꿀 때 사용
+        
+        *기본형
+        1) $("요소선택").html(); - 선택한 요소의 하위요소를 가져와 문자열로 반환
+        2) $("요소선택").html(새요소); - 선택한 요소의 하위요소를 전부 제거하고 지정한 새 요소를 생성, 삽입!
+        */
+    
+        $(document).ready(function(){
+            var result_1 = $("#summer_fruit").html(); 
+            console.log(result_1);
+            
+            $("#summer_fruit p:last").html("<a href=\"#\">사러가기</a>");
+            //역슬래쉬(\)를 사용하면 따옴표를 중첩하여 사용할 수 있음
+        });
+    
+    
+    </script>
+</head>
+<body>
+    <h1>
+        <strong>html() 메서드</strong>
+    </h1>
+    <section id="summer_fruit">
+        <h2>
+            <em>여름과일</em>
+        </h2>
+        <p>수박</p>
+        <p>복숭아</p>
+        <p>자두</p>
+        <!--<a href="#">사러가기</a>-->
+    </section>
+    
+    <section id="winter_fruit">
+        <h2>
+            <em>겨울과일</em>
+        </h2>
+        <p>딸기</p>
+        <p>귤</p>
+        <p>유자</p>
+    </section>
+    
+</body>
+</html>

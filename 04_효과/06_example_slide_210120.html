@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>06_example_slide</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        // 미션 : 마우스 오버했을 때 이미지가 slideDown되고, 마우스 아웃했을 때 이미지가 slideUp되게 하시오!
+        //사용할 이벤트 메서드 : mouseover(), mouseout()
+        /*
+        hover() 이벤트 메서드 : 선택한 요소에 마우스 포인터가 올라갈 때와 선택한 요소에서 벗어날 때 각각 이벤트 발생, 각각 다른 이벤트 핸들러를 실행시킴
+        *기본형
+        $("이벤트대상").hover(
+            function(){마우스오버시 실행될 코드},
+            function(){마우스아웃시 실행될 코드}
+        );
+        */
+    
+        $(function(){
+            //초기설정 - display:none;
+            $('div').hide();
+            
+            //hover(함수1, 함수2);
+            $('button').hover(function(){
+                $('div').slideDown(600);
+            }, function(){
+                $('div').slideUp(600);
+                //$('div').stop().slideUp(600);
+            }); ///hover()
+        });
+    
+    </script>
+</head>
+<body>
+    
+    <button>마우스 오버시 slideDown / 마우스 아웃시 slideUp</button>
+    <br><br>
+    <div>
+        <img src="suzy.jpg" alt="" width="320">
+    </div>
+</body>
+</html>

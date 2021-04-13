@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>01_javaScript_event</title>
+    <script>
+        //함수만들기
+        function nayana() {
+            alert("나야나!!!!");
+        }
+    
+        //이벤트와 함수를 연결시키는 JS 내장함수
+        //addEventListener(이벤트명, 함수명)
+        window.addEventListener("load", function(){
+            
+            //이벤트를 특정 요소와 연결하기
+            var tg = document.getElementById('box');
+            tg.addEventListener("click",nayana);
+            
+        }); ///load 이벤트 구역
+        
+        /*html에서 자바스크립트 이벤트를 연결할 때, 
+        이벤트 이름앞에 on을 붙여서 사용
+        예시) click >> onclick, mouseover >> onmouseover
+        */
+    
+    </script>
+    
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: #fc9;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">클릭</div>
+    <!--<div id="box" onclick="nayana();">클릭</div>-->
+</body>
+</html>

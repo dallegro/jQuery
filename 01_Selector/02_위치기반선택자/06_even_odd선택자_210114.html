@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>06_even_odd선택자</title>
+    
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        //even선택자 : 짝수 인덱스 요소 선택
+        //odd선택자 : 홀수 인덱스 요소 선택
+        
+        //$("요소선택:even") , $("요소선택:odd")
+        
+        //예제1
+        /*$(function(){
+            $("#menu li:even").css("background-color","yellow");
+            $("#menu li:odd").css("color","red");
+        });*/
+        
+        //예제2
+        //1) #container를 클릭하면 >> click()
+        //2)li의 짝수번째에 배경색 red
+        //3)li의 홀수번재에 배경색 yellow
+        //4)동시에 height값이 200px로 변경 (초기 높잇값은 40px로 설정)
+        
+        $(document).ready(function(){
+            $("li").css("height","40px");
+            
+            //nth-child(even|odd)를 사용하면 우리가 아는 순서와 맞출 수 있음
+            $("#container").click(function(){
+                //짝수번째
+                $("li:nth-child(even)").css({
+                    backgroundColor: "red",
+                    height:"200px",
+                    transition: "all .8s"
+                });
+                
+                //홀수번째
+                $("li:nth-child(odd)").css({
+                    backgroundColor: "yellow",
+                    height: "200px",
+                    transition: "all .8s"
+                });
+                
+                
+            });//click()
+        });
+    
+    
+    </script>
+</head>
+<body>
+    <!--예제1-->
+    <!--<h1>even_odd선택자</h1>
+    <ul id="menu">
+        <li>내용1 (인덱스 0)</li>
+        <li>내용2 (인덱스 1)</li>
+        <li>내용3 (인덱스 2)</li>
+        <li>내용4 (인덱스 3)</li>
+    </ul>-->
+    
+    <!--예제2-->
+    <div id="container">
+        <ul class="nav1">
+            <li>0</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <ul class="nav2">
+            <li>0</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+    
+    
+</body>
+</html>

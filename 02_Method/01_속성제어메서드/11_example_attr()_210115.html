@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>11_example_attr()</title>
+    
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        $(function(){
+            
+            //1. springBtn 클릭했을 때 
+            $('#springBtn').click(function (){
+                
+                $('#image img').attr('src','images/spring.jpg');
+            }); ///click, springBtn
+            
+            
+            //2. summerBtn 클릭했을 때
+            $('#summerBtn').click(function(){
+                $('#image img').attr('src','images/summer.jpg');
+            }); ///click, summerBtn
+            
+            
+            $('#fallBtn').click(function(){
+                $('#image img').attr({
+                    src : 'images/fall.jpg',
+                    alt : '가을'
+                });
+            }); ///click, fallBtn
+            
+            $('#winterBtn').click(function(){
+                $('#image img').attr('src','images/winter.jpg');
+            });
+            
+        });
+    
+    
+    
+    
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            margin-top: 50px;
+        }
+        #wrapper {
+            width: 522px;
+            margin: 0 auto;
+        }
+        nav {
+            /*width: 522px;*/
+            width: 100%;
+            height: 40px;
+            margin: 0 auto 10px;
+           /* outline: 3px solid red;*/
+        }
+        li {
+            list-style: none;
+            float: left;
+            width: 123px;
+            height: 40px;
+            margin-left: 10px;
+        }
+        li:first-child {
+            margin-left: 0;
+        }
+        li a {
+            display: block;
+        }
+        li a img {
+            display: block;
+        }
+        #image {
+            width: 522px;
+            height: 400px;
+        }
+        #image img {
+            width: 100%;
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        
+        <!--상단 메뉴버튼 4개-->
+        <nav>
+            <ul>
+                <li id="springBtn">
+                    <a href="#"><img src="images/btn1_2.jpg" alt=""></a>
+                </li>
+                <li id="summerBtn">
+                    <a href="#"><img src="images/btn2_2.jpg" alt=""></a>
+                </li>
+                <li id="fallBtn">
+                    <a href="#"><img src="images/btn3_2.jpg" alt=""></a>
+                </li>
+                <li id="winterBtn">
+                    <a href="#"><img src="images/btn4_2.jpg" alt=""></a>
+                </li>
+            </ul>
+        </nav>
+        
+        <div id="image">
+            <img src="images/spring.jpg" alt="spring">
+        </div>
+        
+        
+    </div>
+    
+    
+</body>
+</html>

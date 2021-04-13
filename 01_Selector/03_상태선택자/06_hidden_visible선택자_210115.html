@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>06_hidden_visible선택자</title>
+        
+        <script src="jquery-1.7.2.min.js"></script>
+        <script src="jquery-ui-1.8.23.custom.min.js"></script>
+        <script>
+            //:hidden - display:none;인 요소를 찾음
+            //:visible - display:none;이 아닌 요소를 찾음
+            
+            //예제
+            //li의 display:none;인 요소를 찾아서 처음 로딩후 2초 후에 1초동안 나타나게 하고
+            //2초 후 1초 동안 숨기시오 
+            $(function(){
+                $("li:hidden").delay(2000).show(1000).delay(2000).hide(1000);
+                
+                //display가 보이는 요소를 선택하여
+                //위의 첫번째 미션 6초 후에 글자 크기를 32px, 글자색을 red로 2초간 애니메이션 하시오.
+                $("li:visible").delay(6000).animate({
+                    fontSize: "32px",
+                    color:"red"
+                }, 2000); ///animate
+                
+            });
+        
+        
+        </script>
+    </head>
+    <body>
+        <div id="container">
+            <ul class="nav1">
+                <li style="display: none;">apple</li>
+                <li>banana</li>
+                <li>grape</li>
+            </ul>
+            <ul class="nav2">
+                <li>lion</li>
+                <li style="display: none;">tiger</li>
+                <li>fox</li>
+            </ul>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>10_scrollTop()</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    
+    <script>
+        //scrollTop() : 브라우저의 스크롤바가 수직으로 이동한 위칫값을 불러오거나 변경할 때 사용
+        //$("요소선택").scrollTop();
+        //$("요소선택").scrollTop(새 값);
+    
+        $(function(){
+            $('button').click(function(){
+                //scrollTop값 구하기
+                //alert($('div').scrollTop());
+                
+                //scrollTop값 정수로 반환받기
+                //alert(Math.ceil($('div').scrollTop()));
+                
+                //scrollTop 위치 지정하기
+                $('div').scrollTop(100);
+            });
+            
+            
+        });
+    
+    </script>
+</head>
+<body>
+    <div style="border: 1px solid #000; width: 100px; height: 150px; overflow: auto;">
+        This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. 
+    </div>
+    <br>
+    <button>Return the vertical position of the scrollbar</button>
+</body>
+</html>

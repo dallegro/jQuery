@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>following_menu</title>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script src="jquery-ui.min.js"></script>
+    <script>
+        /*
+            mousemove() - 선택요소 내부에 마우스 포인터가 움직일 때 계속 발생하는 이벤트
+            
+            *마우스 이벤트 속성
+             -pageX : 스크롤 X축의 이동한 거리를 계산하여 마우스 포인터의 X좌표값을 반환
+             -pageY : 스크롤 Y츅의 이동한 거리를 계산하여 마우스 포인터의 Y좌표값을 반환
+             -screenX : 화면 모니터를 기준으로 마우스 포인터의 X좌표값을 반환 
+             -screenY : 화면 모니터를 기준으로 마우스 포인터의 Y좌표값을 반환 
+             -layerX : position을 적용한 요소를 기준으로 마우스 포인터의 X좌표값 반환
+             -layerY : position을 적용한 요소를 기준으로 마우스 포인터의 Y좌표값 반환
+             -button : 마우스 버튼의 종류에 따라 값을 반환(왼쪽 :0, 휠:1, 오른쪽:2)
+            
+            */
+
+        $(function() {
+
+            //미션1. 컨테이너 박스 움직이기
+            //이벤트대상 #home
+            $('#home').mousemove(function(e) {
+                //마우스포인터의 위치값 알아내기
+                e.pageX;
+                e.pageY;
+
+                console.log('x좌표: ' + e.pageX + ' / y좌표: ' + e.pageY);
+
+                var posy = e.pageY - ($(this).height() / 2);
+                //Y축의 스크롤 이동값을 읽어서 박스 높이의 1/2 빼주기
+                ///박스높이값의 절반만큼 뺀 y축의 위치값을 계산 >> 마우스 포인터가 home 박스에 중간에 오게 하기 위해!!
+
+                //컨테이너 박스 움직이기
+                $('#container').css({
+                    top: posy + 'px'
+                });
+            }); //mousemove()
+
+            //미션2. #home을 클릭했을 때, 이미지가 왼쪽에서 오른쪽으로 나열, 다시 #home을 클릭했을 때 이미지가 오른쪽에서 왼쪽으로 숨겨지도록 구현
+
+            var msts = 0; //메뉴상태값 (0-안보임(false) , 1-보임(true))
+
+            $('#home').click(function() {
+                if (msts === 0) { //#menu가 안보이는 상태일때
+                    $('#menu').animate({
+                        left: "50px"
+                    }, 500, 'easeOutCirc');
+
+                    msts = 1; //상태변경
+
+                } //if문
+                else { //#menu가 보이는 상태일때
+                    $('#menu').animate({
+                        left: "-600px"
+                    }, 500, 'easeOutCirc');
+
+                    msts = 0; //상태변경
+                } //else문
+
+            }); //click()
+
+            //미션3. #menu li에 마우스 오버시 opacity값을 1, 마우스 아웃시 opacity값을 0.7로 변경
+            //fadeTo(시간, 투명도, 이징, 함수) 메서드
+            //hover(함수1, 함수2)
+            $('#menu li').hover(
+                function() { //over
+                    $(this).fadeTo(300, 1);
+                },
+                function() { //out
+                    $(this).fadeTo(300, 0.7);
+                }
+            ); //hover()
+
+            /*$('#menu li').mouseenter(function(){
+                $(this).animate({opacity: 1.0},200);
+            });//mouseenter
+            $('#menu li').mouseleave(function(){
+                $(this).stop().animate({opacity: 0.7},200);
+            })*/
+
+            //미션4. #menu li 클릭시 페이지 이동하기(새창)
+            $('#menu li').click(function() {
+                var idx = $(this).index();
+                //alert(idx);
+                switch (idx) {
+                    case 0:
+                        idx = 'http://www.naver.com';
+                        break;
+                    case 1:
+                        idx = 'http://www.daum.net';
+                        break;
+                    case 2:
+                        idx = 'https://www.google.com/';
+                        break;
+                } //switch문
+                //페이지 이동(새창) - window 객체+location객체
+                window.open().location.href=idx;
+                
+            }); //click()
+        }); //jQuery
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div#container {
+            width: 600px;
+            height: 200px;
+            position: relative;
+            left: 0;
+            top: 0;
+            /*outline: 3px solid red;*/
+            /*영역확인*/
+        }
+
+        div#home {
+            width: 50px;
+            height: 200px;
+            /*사진 높이와 동일*/
+            background: #ff9999;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+        }
+
+        ul#menu {
+            width: 600px;
+            height: 200px;
+            position: absolute;
+            top: 0;
+            left: -600px;
+            list-style: none;
+            z-index: 1;
+        }
+
+        ul#menu li {
+            width: 200px;
+            height: 200px;
+            float: left;
+            opacity: 0.7;
+            /*transition: all .3s*/
+        }
+
+        /*ul#menu li:hover {
+            opacity: 1;
+        }*/
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="home">HOME</div>
+        <ul id="menu">
+            <li><img src="th_bg1.jpg" alt=""></li>
+            <li><img src="th_bg2.jpg" alt=""></li>
+            <li><img src="th_bg3.jpg" alt=""></li>
+        </ul>
+    </div>
+</body>
+
+</html>

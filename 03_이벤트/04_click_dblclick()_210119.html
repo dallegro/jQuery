@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>04_click_dblclick()</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        /*마우스 이벤트
+        사용자가 사이트에서 마우스를 이용하여 취하는 모든 행위
+        
+        
+        1. click() 이벤트 메서드
+        선택한 요소를 클릭했을 때 이벤트를 발생시키거나 선택한 요소에 강제로 클릭 이벤트 발생
+        
+        *기본형
+        $("이벤트대상").click(function(){자바스크립트 코드;});
+        $("이벤트대상").on("click",function(){자바스크립트 코드;});
+        
+        
+        2. dblclick() 이벤트 메서드
+        선택한 요소를 연속해서 두 번 클릭했을 때 이벤트를 발생시키거나 선택한 요소에 강제로 더블클릭 이벤트 발생
+        
+        *기본형
+        $("이벤트대상").dblclick(function(){자바스크립트 코드;});
+        $("이벤트대상").on("dblclick", function(){자바스크립트 코드;})
+        */
+    
+        /*<a>,<form>태그에 클릭 이벤트 적용시 기본 이벤트 차단하기
+        <a>요소에 click, dblclick 을 등록하면 클릭할 때마다 a에 링크된 주소로 이동하며, <form>요소의 submit 버튼도 action에 등록된 주소로 이동시키는 문제 발생
+        >> 그러므로 click, dblclick 이벤트 적용시 기본 이벤트 차단 필요!
+            
+        1. return false를 이용한 차단 방식
+        $("a 또는 form").이벤트메서드(function(){
+            자바스크립트 코드;
+            return false;
+        });
+        
+        2. preventDefault() 메서드를 이용한 차단 방식
+        $("a 또는 form").이벤트메서드(function(e){ //e는 매개변수(주로 이벤트 객체를 의미하는 e를 사용)
+            e.preventDefault();
+            
+        });
+            
+        */
+        
+        $(document).ready(function(){
+            
+            //a태그의 기본 이벤트(페이지이동) 막아주기1
+            $('.btn1').on("click", function(e){
+                e.preventDefault();
+                $('.txt1').css("background-color","red");
+            });
+            
+            //a태그의 기본 이벤트(페이지이동) 막아주기2
+            $('.btn2').on("click", function(){
+                $('.txt2').css({
+                    backgroundColor:"blue",
+                    color: "white"
+                });
+                return false; //다음 동작(사이트이동)이 실행되지 않음
+            });
+            
+            $('.btn3').on("dblclick", function(){
+                $('.txt3').css({
+                    backgroundColor: "darkseagreen"
+                });
+            });
+            
+            
+        }); ///jQuery
+    
+    
+    </script>
+</head>
+<body>
+   <p><a href="http://www.daum.net" class="btn1" target="_blank">다음</a></p>
+   <p class="txt1">Content1</p>
+   
+   <p><a href="http://www.naver.com" class="btn2" target="_blank">네이버</a></p>
+   <p class="txt2">Content2</p>
+   
+   <p><button class="btn3">버튼</button></p>
+   <p class="txt3">Content3</p>
+    
+    
+    
+</body>
+</html>

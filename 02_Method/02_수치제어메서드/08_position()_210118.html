@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>08_position()</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        //position() : 포지션 기준이 되는 요소를 기준으로 선택한 요소에서 가로/세로로 떨어진 위치의 좌표값을 반환하거나 변경
+        //$("요소선택").position().[Left | right | top | bottom]
+    
+        $(document).ready(function(){
+            $('#btn1').click(function(){
+                alert($('#p1').position().left);
+                //position의 기분이 없기 때문에 값을 정확하게 읽을 수 없음
+            });
+            
+            $('#btn2').click(function(){
+                alert($('#p2').position().top);
+            });
+            
+            
+        });
+    
+    
+    </script>
+    
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        button {
+            margin: 20px 0 10px 20px;
+        }
+        
+        #parent {
+            position: relative; /*#p2의 부모, 즉 기준요소가 됨*/
+            top: 50px;
+            left: 20px;
+            width: 200px;
+            height: 100px;
+            border: 1px solid red;
+        }
+        
+        #p1 {
+            /*margin-left: 200px;*/
+            padding-left: 200px;
+        }
+        #p2 {
+            background-color: lightpink;
+            
+            position: absolute;
+            top: 20px;
+            /*right: 5px;
+            bottom: 10px;*/
+        }
+    
+    </style>
+</head>
+<body>
+    
+    <button id="btn1">#p1 element position</button>
+    <button id="btn2">#p2 element position</button>
+    
+    <p id="p1">This is a paragraph.</p>
+    
+    <div id="parent">
+        <p id="p2">This is a paragraph.</p>
+    </div>
+    
+    
+</body>
+</html>

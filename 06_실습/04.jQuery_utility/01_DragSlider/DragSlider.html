@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DragSlider</title>
+
+    <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="jquery-ui.min.js"></script>
+    <script src="jquery-touch-punch.min.js"></script>
+    <!--모바일에서 적용할수있도록 별도로 터치펀치 적용-->
+
+    <script>
+        $(function() {
+
+            //드래그할 대상 #move
+            $('#move').draggable({
+                axis: 'x' //x축 고정 (y를 쓰면 y축 고정)
+            });
+
+            /*
+            draggable() 관련속성
+            -axis : 축 고정
+            -cursor : 드래그 하는 동안 마우스 포인터 모양 설정
+            -stack : 드래그 대상이 되는 요소들을 자동으로 깊이 설정
+                    ex) stack : 'draggable' - 드래그되는 요소가 가장 위에 올라옴
+            -opacity : 드래그하는 동안 불투명도
+            
+            */
+
+            //drag했을 때 부드럽게 움직이기 위해 transition 적용
+            $('#move').css({
+                transition: 'all .6s ease-out'
+            });
+
+            //이동위치 한계설정/////////
+            //첫번째 이미지와 마지막 이미지가 화면 중간까지만 오도록 설정
+
+            /*
+            1.mouseup 이벤트 - 마우스 왼쪽 버튼을 누르다가 높을 때 발생
+            2.mousedown 이벤트 - 마우스 왼쪽 버튼을 누르는 시점에 발생
+            3.mousemove 이벤트 - 마우스 포인터가 설정영역에서 움직일때 연속적으로 발생
+            */
+
+            $('html,body').bind('mouseup mousemove', function() { //bind() 이벤트 2개등록
+
+                //1. 움직이는 박스(#move)의 현재 left값 알아오기
+                var mpos = $('#move').offset().left;
+                console.log('현재이동박스 left값: ' + mpos);
+
+
+                //2. 화면 절반크기 계산
+                var fpoint = $(window).width() / 2;
+                console.log('현재화면 가로폭 절반: ' + fpoint);
+
+                //3. 마지막 이미지 한계값
+                var lpoint = $('#move').width() - fpoint;
+                console.log('마지막 한계값: ' + lpoint);
+
+                //4. 처음과 마지막 위치값 강제 설정하기
+                if (mpos > fpoint) { //이동한 값>화면가로폭 절반
+                    $('#move').css({
+                        left: fpoint + 'px'
+                    });
+                } else if (mpos < -lpoint){
+                    $('#move').css({
+                        left:-lpoint+'px'
+                    });
+                }
+            });
+
+
+
+        }); //jQuery
+    </script>
+
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+        }
+
+        ul::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        li {
+            float: left;
+
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        /*사용자 드래그를 막기위한 CSS 설정*/
+        .disableselect {
+            -webkit-user-select: none;
+            /*Chrome/Safari/Opera*/
+            -ms-user-select: none;
+            /*Internet Explorer/Edge*/
+            -moz-user-select: none;
+            /*Firefox*/
+            user-select: none;
+        }
+
+        /*
+        user-select : 브라우저에 드래그나 더블클릭을 사용한 텍스트 선택 등을 막기 위해 사용
+        
+        user-select : auto | all | none | text
+        -auto : 기본값, 더블클릭 시 또는 드래그할 경우 선택됨
+        -all : 더블클릭이 아닌 클릭만으로 선택 가능
+        -none : 클릭이나 드래그로 선택할 수 없음 (텍스트 선택 안됨)
+        -text : 텍스트 선택가능 (기본적으로 defult와 비슷한 기능)
+        
+        *페이지 전체를 선택되지 않도록 할 떄 
+        {user-select:none;}
+        */
+        .disabledrag {
+            -webkit-user-drag: none;
+            /*Chrome/Safari/Opera*/
+            -ms-user-drag: none;
+            /*Internet Explorer/Edge*/
+            -moz-user-drag: none;
+            /*Firefox*/
+            -o-user-drag: none;
+            user-drag: none;
+
+        }
+
+        #handle {
+            width: 100%;
+            height: 300px;
+            position: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #move {
+            width: 7200px;
+            /*li width 300px * 24개*/
+            height: 100%;
+            position: absolute;
+
+        }
+
+        #move li {
+            width: 300px;
+        }
+
+        #move li img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>ICE CREAM GALLERY</h1>
+    <div id="handle">
+        <div id="move" class="disableselect disabledrag">
+            <ul>
+                <!--li*24>img[alt=item]-->
+                <li><img src="images/1.jpg" alt="item"></li>
+                <li><img src="images/2.jpg" alt="item"></li>
+                <li><img src="images/3.jpg" alt="item"></li>
+                <li><img src="images/4.jpg" alt="item"></li>
+                <li><img src="images/5.jpg" alt="item"></li>
+                <li><img src="images/6.jpg" alt="item"></li>
+                <li><img src="images/7.jpg" alt="item"></li>
+                <li><img src="images/8.jpg" alt="item"></li>
+                <li><img src="images/9.jpg" alt="item"></li>
+                <li><img src="images/10.jpg" alt="item"></li>
+                <li><img src="images/11.jpg" alt="item"></li>
+                <li><img src="images/12.jpg" alt="item"></li>
+                <li><img src="images/13.jpg" alt="item"></li>
+                <li><img src="images/14.jpg" alt="item"></li>
+                <li><img src="images/15.png" alt="item"></li>
+                <li><img src="images/16.png" alt="item"></li>
+                <li><img src="images/17.png" alt="item"></li>
+                <li><img src="images/18.jpg" alt="item"></li>
+                <li><img src="images/19.jpg" alt="item"></li>
+                <li><img src="images/20.png" alt="item"></li>
+                <li><img src="images/21.png" alt="item"></li>
+                <li><img src="images/22.png" alt="item"></li>
+                <li><img src="images/23.jpg" alt="item"></li>
+                <li><img src="images/24.jpg" alt="item"></li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

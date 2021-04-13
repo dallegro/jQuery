@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>05_nth-child선택자</title>
+        
+        <script src="jquery-1.7.2.min.js"></script>
+        
+        <script>
+            //nth-child(숫자)는 선택한 요소의 무리 중 지정한 숫자의 요소를 선택
+            //nth-child(숫자n)는 선택한 요소의 무리 중 지정한 배수의요소를 선택
+            
+            //$("요소선택:nth-child(숫자)")
+            //$("요소선택:nth-child(숫자n)")
+            //$("요소선택:nth-last-child(숫자)") : 선택한 요소 중 마지막 위치에서부턴 지정한 숫자에 위치한 요소를 선택
+        
+            $(document).ready(function(){
+                
+                $("#menu1 li:nth-child(2)").css("background-color","skyblue");
+                $("#menu1 li:nth-child(3n)").css("border","2px dashed #f00");
+                
+                $("#menu2 li:nth-last-child(2)").css("background-color","aqua");
+            });
+        
+        
+        
+        </script>
+    </head>
+    <body>
+        <h1>nth-child선택자</h1>
+        <ul id="menu1"> 
+            <li>내용1-1</li>
+            <li>내용1-2</li>
+            <li>내용1-3</li>
+            <li>내용1-4</li>
+            <li>내용1-5</li>
+            <li>내용1-6</li>
+        </ul>
+        <ul id="menu2">
+            <li>내용2-1</li>
+            <li>내용2-2</li>
+            <li>내용2-3</li>
+            <li>내용2-4</li>
+        </ul>
+    </body>
+</html>

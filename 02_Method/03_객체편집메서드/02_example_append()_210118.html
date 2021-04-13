@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>02_example_append()</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+    
+        $(document).ready(function(){
+            //미션 : 추가 버튼을 클릭하면 이미지가 랜덤하게 #container에 추가되게 하시오.
+            $('#append').click(function(){
+                //1~5까지 랜덤수 만들기
+                var num = Math.ceil(Math.random()*5);
+                //console.log("랜덤수: "+num);
+                
+                $('#container').append('<img src="image/th_pic' + num + '.jpg" alt="이미지' + num + '">');
+                
+            }); /// #append.click()
+            
+            
+            //추가미션 : 자동버튼을 클릭하면 0.1초 간격으로 이미지를 랜덤 추가하고 멈춤 버튼을 누르면 멈추시오.
+            
+            //var 참조변수 = setInterval(function(){}, 시간간격(ms))
+            //clearInterval(참조변수)
+            
+            /*강제로 이벤트 발생시키기 - trigger()
+            
+            $("이벤트 대상").단독이벤트 등록메서드();
+            $("이벤트 대상").trigger("이벤트 종류");
+            */
+            
+            var autoI; //인터발용 변수(값을 할당하지 않았으므로 false상태)
+            $('#auto').click(function(){
+                
+                if(!autoI){
+                    //autoI 변수는 false값을 반환
+                    //if문을 실행시키기 위해 !(다르다, 같지않다)를 사용하여 반대의 값, true상태로 변경하여 if문 실행
+                    
+                    autoI = setInterval(function(){
+                        //trigger() 메서드를 이용하여 이벤트 발생시키기
+                        $('#append').trigger('click');
+                        //강제로 실행할 이벤트 >> click
+                        //강제로 실행하는 click이벤트의 대상 >> #append
+                    }, 100); /// setInterval()
+                    
+                    console.log(Boolean(autoI));
+                }
+            }); /// #auto.click()
+            
+            //멈춤버튼을 클릭했을 때
+            $('#stop').click(function(){
+                clearInterval(autoI);
+                autoI = false; //if문에 들어갈 수 있도록 false상태로 초기화!
+                
+            }); /// #stop.click()
+            
+        });
+    
+    </script>
+</head>
+<body>
+    
+    <button id="append">추가</button>
+    <button id="auto">자동</button>
+    <button id="stop">멈춤</button>
+    
+    <div id="container">
+        <!--<img src="" alt="">-->
+    </div>
+    
+    <style>
+        div {border: 1px solid #00f; margin-top: 30px;}
+    </style>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>04_slideDown_slideUp()</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        /*
+        1. slideDown(시간, 이징, 함수)
+        : 숨겨진 요소가 아래로 펼쳐짐
+        : 선택요소의 height값을 원래 높이로 복원 애니메이션하는 메서드
+        
+        2. slideUp(시간, 이징, 함수)
+        : 요소가 위로 접히며 숨겨짐
+        : 선택요소의 height값을 0으로 변경하여 애니메이션
+        
+        *slideUp/slideDown 메서드의 특징
+        1) height값 설정 불필요
+        2) overflow:hidden; 설정 불필요!
+        (slideUp 했을 때, display:none으로 변경됨)
+        */
+    
+        $(function(){
+            $('#flip').click(function(){
+                $('#panel').slideDown();
+            });
+            
+            $('#flip2').click(function(){
+                $('#panel2').slideUp();
+            });
+            
+        });
+    
+    
+    
+    </script>
+</head>
+<body>
+   <div class="slide1">
+       <div id="flip">Click to slideDown</div>
+       <div id="panel">Hello World!</div>
+   </div>
+   
+   <div class="slide2">
+       <div id="flip2">Click to slideUp</div>
+       <div id="panel2">Good bye World!</div>
+   </div>
+   
+   <style>
+       .slide1 {
+             margin-bottom: 50px;  
+       }
+       #flip, #panel {
+           padding: 5px;
+           text-align: center;
+           background-color: lightgoldenrodyellow;
+           border: 1px solid #c3c3c3;
+       }
+       #panel {
+           padding: 50px;
+           display: none;
+           /*slideDown 효과를 주려면 해당요소는 화면상에 보이지 않는 상태여야 함*/
+       }
+       
+       #flip2, #panel2 {
+           padding: 5px;
+           text-align: center;
+           background-color: lightpink;
+           border: 1px solid #333;
+       }
+       #panel2 {
+           padding: 50px;
+           border-top: 0;
+       }
+    
+    
+    </style>
+   
+   
+   
+   
+   
+   
+   
+   
+    
+</body>
+</html>

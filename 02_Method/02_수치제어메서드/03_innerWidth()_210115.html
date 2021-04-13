@@ -1,0 +1,53 @@
+    <!DOCTYPE html>
+    <html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>03_innerWidth()</title>
+        
+        <!--<script src="jquery-1.7.2.min.js"></script>-->
+        <script src="jquery-1.12.4.min.js"></script>
+        
+        <!--
+        innerWidth/innerHeight/outerWidth/outerHeight는 제이쿼리 라이브러리 버전의 영향을 받음 (1.11.3 version 이상 사용)
+        -->
+        
+        <script>
+            //innerWidth() : 안쪽 여백(padding)을 포함한 너빗값을 반환하거나 변환
+            //$("요소선택").innerWidth(); / $("요소선택").innerWidth(값);
+        
+            $(function(){
+                $('button').click(function(){
+                    alert($('div').innerWidth()); //320
+                    $('div').innerWidth(200);
+                    //padding값은 그대로, width값이 변경됨
+                });
+                
+                
+            });
+        
+        
+        </script>
+        
+        
+        <style>
+            div {
+                width: 300px;
+                height: 100px;
+                padding: 10px;
+                margin: 3px;
+                border: 1px solid #000;
+                background-color: darkseagreen;
+            }
+        
+        </style>
+    </head>
+    <body>
+        <div>div</div>
+        <br>
+        <button>Display the Inner width of div</button>
+        
+        <p>innerWidth() - padding값을 포함한 크기를 반환!</p>
+        
+        
+    </body>
+    </html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>04_태그선택자</title>
+
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        //태그(요소)선택자 기본형: $("태그자")
+
+        //예제1
+        $(document).ready(function() {
+            $('h3').css('background-color', 'darkseagreen').css('border', '5px dashed greenyellow');
+
+        });
+
+        //예제2 - header 태그를 클릭하면 큰 제목 배경을 노란색으로 변경
+        $(function() {
+            $('header').click(function() {
+                $('h2').css('background-color', 'yellow');
+
+                //추가미션 : 동시에nav 태그의 배경색, 테두리, 글자크기, 글자색 변경
+
+                $('nav').css({
+                    backgroundColor: 'darkseagreen',
+                    border: '2px solid red',
+                    fontSize: '40px',
+                    color: 'yellow',
+                    transition: 'all 2s'
+                });//css
+
+                //$('nav').css('background-color', 'lightpink').css('border','5px dashed darkred').css('font-size','3em').css('color','#fff');
+
+            });//click()
+            
+        });//jQuery
+    </script>
+
+
+</head>
+
+<body>
+    <!--예제1-->
+    <h1>제이쿼리</h1>
+    <h2>선택자</h2>
+    <h3>태그선택자</h3>
+    <h3>태그선택자</h3>
+
+    <!--예제2-->
+    <div id="container">
+        <header>
+            <h2>Welcome mySite</h2>
+        </header>
+        <nav>
+            <ul class="list">
+                <li id="first">One</li>
+                
+                \<li id="second">Two</li>
+                <li id="third">Three</li>
+            </ul>
+        </nav>
+    </div>
+</body></html>

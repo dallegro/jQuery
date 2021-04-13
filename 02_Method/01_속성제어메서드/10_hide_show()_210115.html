@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>10_hide_show()</title>
+    
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        /*
+        show(시간, 이징easing, 함수) : display를 보이게 하는 메서드
+        hide(시간, 이징easing, 함수) : display:none;으로 변경하는 메서드
+        toggle(시간, 이징easing, 함수) : show인 상태를 hide로 만들거나 hide인 상태를 show의 상태로 자동전환 해주는 메서드
+        */
+        
+        $(function(){
+            
+            //미션
+            //1. #hide 버튼을 클릭하면 이미지가 1초동안 사라지고 사라진 후 이미지를 변경한다.
+            
+            var inum = 1; //이미지 번호 변수
+            
+            $('#hide').click(function(){
+                $('img').hide(1000, function(){ //hide 후 실행
+                    inum++; //이미지 번호 1 증가
+                    if (inum === 4) inum=1; //이미지가 3개이므로, 한계수 4
+                    
+                    $(this).attr('src','image/sample' + inum + '.jpg');
+                }); //hide
+            }); //click
+            
+            
+            //2. #show 버튼을 클릭하면 이미지가 1초동안 나타난다.
+            $('#show').click(function(){
+                $('img').show(1000);
+            }); //click
+            
+            
+            //3. #toggle 버튼을 클릭하면 show(), hide() 가 전환되어 나타난다.
+            $('#toggle').click(function(){
+                $('img').toggle(1000, function(){
+                    if ($(this).css('display') === 'none') {
+                        //img가 안보이는 상태일 때!!! >> hide()일 때 변경
+                        
+                        inum++;
+                        if(inum === 4) inum = 1;
+                        $(this).attr('src', 'image/sample'+inum+'.jpg');
+                        
+                     } //if문  
+                }); //toggle
+            }); //click
+            
+        }); ////jQuery
+    
+    
+    
+    
+    
+    </script>
+</head>
+<body>
+    
+    <img src="image/sample1.jpg" alt="" width="300" height="300">
+    <br>
+    <button id="hide">hide()</button>
+    <button id="show">show()</button>
+    <button id="toggle">toggle()</button>
+</body>
+</html>

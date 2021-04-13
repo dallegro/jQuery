@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>07_mousemove()</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        /*이벤트가 발생하면 이벤트 핸들러의 매개변수에 이벤트 객체가 생성, 생성된 이벤트 객체에 이벤트 타입에 맞는 다양한 정보를 제공하는 속성과 메서드가 포함됨
+        
+        mousemove() : 선택한 요소 범위에서 마우스 포인터가 움직였을 때 이벤트 발생
+        
+        *기본형
+        $("이벤트대상").mousemove(function(매개변수){
+            매개변수(이벤트객체).속성;
+        });
+        
+        */
+        
+        $(function(){
+            $(document).on("mousemove", function(e){
+                
+                $('.posX').text(e.pageX);
+                $('.posY').text(e.pageY);
+                
+                //pageX : 스크롤 X축의 이동한 거리를 계산하여 마우스 포인터의 X좌표값 반환 >> e.pageX
+                //pageY : 스크롤 Y축의 이동한 거리를 계산하여 마우스 포인터의 Y좌표값 반환 >> e.pageY
+            });
+            
+            
+        });
+        
+        
+    
+    </script>
+</head>
+<body>
+    <h1>mouseover</h1>
+    <p>X : <span class="posX"></span>px</p>
+    <p>Y : <span class="posY"></span>px</p>
+    <p></p>
+    
+    
+    
+    
+    
+    
+    
+</body>
+</html>

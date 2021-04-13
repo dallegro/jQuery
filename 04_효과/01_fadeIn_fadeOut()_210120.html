@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>01_fadeIn_fadeOut()</title>
+        
+        <script src="jquery-1.12.4.min.js"></script>
+        <script>
+            /*효과메서드 기본형
+            $("요소선택").효과메서드(효과소요시간, 가속도, 콜백함수);
+            
+            (1)효과소요시간 : 요소를 숨기거나 노출할 때 소요되는 시간
+            -방법1 : "slow", "normal", "fast"
+            -방법2 : 1,000초(1초), 500(0.5초)
+            
+            (2)가속도 : 숨기거나 노출하는 동안의 가속도 설정, easing
+            -방법1 : "swing" 시작과 끝은 느리게, 중간은 빠른속도로 움직임(기본값)
+            -방법2 : "linear" 일정한 속도로 움직임
+            
+            (3)콜백함수 : 노출과 숨김 효과가 끝난후에 실행할 함수, 생략할 수 있음
+            */
+        
+            /*
+            1. fadeIn(시간, 이징, 함수) 메서드
+            : display를 보이게 한 후 opacity 값을 0에서 1로 변경, 숨겨진 요소가 점점 선명해지게 만듬
+            
+            2. fadeOut(시간, 이징, 함수) 메서드
+            : opacity값을 1에서 0으로 변경하고 display:none으로 변경, 요소가 점점 투명해지면서 사라짐
+            
+            */
+            
+            //fadeIn()
+            $(function(){
+                $('.btn1').click(function(){
+                    $('#div1').fadeIn(); //400이 default값
+                    $('#div2').fadeIn(2000);
+                    $('#div3').fadeIn('slow');
+                });
+            }); 
+            
+            //fadeOut()
+            $(function(){
+                $('.btn2').click(function(){
+                    //$('#div4').fadeOut();
+                    
+                    $('#div5').fadeOut(2000, 'linear', function(){
+                        alert("Byebye~~~~~~");
+                    });
+                });
+            });
+        
+        
+        </script>
+        
+        <style>
+            #div1, #div2, #div3 {
+                width: 100px;
+                height: 100px;
+                margin-top: 20px;
+                display: none;
+                /*화면에 보이지 않는 상태여야 fadeIn으로 나타나게 할 수 있음!*/
+            }
+            #div1 {
+                background-color: red;
+            }
+            #div2 {
+                background-color: darkseagreen;
+            }
+            #div3 {
+                background-color: yellow;
+            }
+            
+            #div4 {
+                width: 200px;
+                height: 100px;
+                margin-top: 20px;
+                background-color: indianred;
+            }
+            #div5 {
+                width: 300px;
+                height: 100px;
+                margin-top: 20px;
+                background-color: greenyellow;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>fadeIn()</h1>
+        <button class="btn1">Click to fade in boxes</button>
+        <div id="div1"></div>
+        <div id="div2"></div>
+        <div id="div3"></div>
+        
+        <h1>fadeOut()</h1>
+        <button class="btn2">Click to fade out box</button>
+        <div id="div4"></div>
+        <div id="div5"></div>
+        
+    </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>03_fadeTo()</title>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        /*fadeTo(시간, 투명도, 이징, 함수) 메서드
+                : opacity값을 특정값으로 변경하여 애니메이션
+                : opacity값이 0이 되어도 display:none; 되지 않는다!
+                  (공간이 계속해서 남아있음!)
+                
+                */
+        //기본예제
+        $(function () {
+            $('#box').mouseover(function () {
+                $(this).fadeTo(500, 0.4);
+                //0~1사이의 투명도값을 입력
+            });
+        });
+        
+        
+        //미션 : 각 버튼을 클릭했을 때, 버튼에 쓰여진 수치에 맞게 투명도를 조절하여 변경하시오.
+        $(function () {
+            $('button').click(function () {
+                var opa = $(this).text();
+                //alert(opa);
+                console.log(opa);
+                $('img').fadeTo(500, opa);
+            });
+        });
+    </script>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <br>
+    <!--미션--><img src="home3.jpg" alt="">
+    <br>
+    <br>
+    <button>0</button>
+    <button>0.1</button>
+    <button>0.2</button>
+    <button>0.3</button>
+    <button>0.4</button>
+    <button>0.5</button>
+    <button>0.6</button>
+    <button>0.7</button>
+    <button>0.8</button>
+    <button>0.9</button>
+    <button>1</button>
+</body>
+
+</html>

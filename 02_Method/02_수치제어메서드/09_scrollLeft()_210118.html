@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>09_scrollLeft()</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        //scrollLeft() : 브라우저의 스크롤바가 수평으로 이동한 위칫값을 불러오거나 변경할 때 사용
+        //$("요소선택").scrollLeft();
+        //$("요소선택").scrollLeft(새 값);
+    
+        $(function(){
+            $('button').click(function(){
+                //alert($('div').scrollLeft()); //스크롤바 움직이면서 변경되는 값 확인하기
+                
+                //정수로 값 반환하기1 - Math.ceil(숫자) : 소수점 첫째자리에서 무조건 올림하여 정수반환
+                //alert(Math.ceil($('div').scrollLeft()));
+                
+                //정수로 값 반환하기2 - 변수에 값 넣어서 alert 띄우기
+                var int = Math.ceil($('div').scrollLeft());
+                //alert(int);
+                
+                
+                //button을 클릭했을 때, 수평으로 100px만큼 이동
+                $('div').scrollLeft(100);
+            });
+            
+            
+            
+        });
+    
+    
+    </script>
+</head>
+<body>
+    
+    <div style="border: 1px solid #000; width: 120px; height:130px; overflow: auto;">The longest word in the english dictionary is:
+    tpeianrleqkntlqwekjhtowifusljkntlqfplcdjstliqu4otiquwed</div>
+    <br>
+    
+    <button>Click to move the scrollbar by horizontal.</button>
+</body>
+</html>

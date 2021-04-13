@@ -1,0 +1,67 @@
+    <!DOCTYPE html>
+    <html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>javascript VS jQuery</title>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        
+        <script>
+            /*
+            1. 제이쿼리란?
+                -자바스크립트 라이브러리 중 하나로 보다 쉽게 자바스크립트 코딩을 할 수 있도록 많은 양의 코딩을 줄여주며 직관적인 사용을 가능하게 해 주는 기능들을 구현한 함수의 집합체!
+                
+            2. 제이쿼리 사용을 위한 기본 설정
+                1) jQuery 라이브러리(CDN)를 웹 페이지 상단에 다운로드 혹은 CDN 방식으로 다운하여 html head태그 안에 넣어준다.
+                (CDN - Content Delivery Network: 공개된 웹에 올려져 있는 라이브러리를 링크방식으로 가져오는 것)
+                
+                2) jQuery 시작 코드 블록을 jQuery 라이브러리 아래에 위치시킨다.
+                
+                3) jQuery 코드블록으로 구현코드를 감싸준다. 
+                
+                [제이쿼리 시작 코드블록 만들기]
+                1.
+                jQuery(document).ready(function(){구현코드;});
+                
+                2.
+                $(document).ready(function(){구현코드;});
+            
+                3. 
+                $(function(){구현코드;});
+                
+                
+                $==jQuery의 축약형
+                $(주어/선택자).이벤트(function(){
+                    실행코드;
+                });
+            
+            */
+            
+            $(document).ready(function(){
+                //document가 준비되면
+                $('.three>span').css('color','red');
+            });
+            
+            /*css메서드
+             - 형식 : $(선택자).css(속성명,값); -> 하나의 값을 바꿀 때!
+                      $(선택자).css({속성명:값, 속성명:값,..}) -> 다중설정시!
+             - 기능 : 선택요소의 CSS를 변경함
+            */
+            
+            
+            
+        
+        
+        </script>
+    </head>
+    <body>
+        <div id="wrapper">
+        <ul>
+            <li class="one">첫번째</li>
+            <li class="two">두번째</li>
+            <li class="three"><span>세번째(여기에 CSS속성을 적용해 보세요!)</span></li>
+            <li class="four">네번째</li>
+        </ul>
+    </div>
+    </body>
+    </html>

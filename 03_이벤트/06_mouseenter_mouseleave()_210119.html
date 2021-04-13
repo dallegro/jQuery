@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>06_mouseenter_mouseleave()</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        /*
+        mouseenter() : 대상요소의 경계 범위에 마우스 포인터가 들어오면 이벤트 발생
+        
+        mouseleave() : 대상요소의 경계 범위에서 마우스 포인터가 완전히 벗어나면 이벤트 발생
+        */
+    
+        $(document).ready(function(){
+            
+            //mouseover & mouseout
+            $('#box_1').on({
+                "mouseover" : function(){
+                    $('#box_1').css({
+                        backgroundColor: "yellow"
+                    });
+                }, 
+                "mouseout" : function(){
+                    $('#box_1').css({
+                        background: "none"
+                    });
+                }
+            }); //on()
+            
+            //mouseenter & mouseleave
+            $('#box_2').mouseenter(function(){
+                $(this).css({
+                    backgroundColor: "pink"
+                });
+            }); //mouseenter
+            
+            $('#box_2').mouseleave(function(){
+                $(this).css({
+                    backgroundColor:"transparent"
+                });
+            }); //mouseleave
+            
+            
+        });
+    
+    
+    </script>
+</head>
+<body>
+   <h1>mouseover/out</h1>
+   <div id="box_1">
+       <p><a href="#">내용1</a></p>
+       <p><a href="#">내용2</a></p>
+       <p><a href="#">내용3</a></p>
+   </div>
+   
+   <h1>mouseenter/mouseleave</h1>
+   <div id="box_2">
+       <p><a href="#">내용4</a></p>
+       <p><a href="#">내용5</a></p>
+       <p><a href="#">내용6</a></p>
+   </div>
+   
+   
+   
+   
+    
+</body>
+</html>

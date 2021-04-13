@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>03_first_last선택자</title>
+        <script src="jquery-1.7.2.min.js"></script>
+        <script>
+            //first선택자 : 선택된 요소 중 첫번째 요소만 선택
+            //기본형 : $("요소선택:first") 또는 $("요소선택").first()
+            
+            //last선택자 : 선택된 요소 중 마지막 요소만 선택
+            //기본형 : $("요소선택:last") 또는 $("요소선택").last()
+            
+            
+            $(document).ready(function(){
+                $('#menu li:first').css('background-color','red');
+                $('#menu li').first().css('color','silver');
+                
+                $('#menu li:last').css('background-color','skyblue');
+                $('#menu li').last().css({
+                    fontStyle: "italic",
+                    fontWeight: "bold",
+                    fontSize: "30px"
+                });
+            }); //jQuery
+            
+            
+        
+        
+        </script>
+        
+      <!--  <style>
+        
+            #menu li:first-child {}
+            #menu li:last-child {}
+        
+        </style>-->
+    </head>
+    <body>
+        <h1>first/last 선택자</h1>
+        <ul id="menu">
+            <li>내용1</li>
+            <li>내용2</li>
+            <li>내용3</li>
+            <li>내용4</li>
+        </ul>
+    </body>
+</html>

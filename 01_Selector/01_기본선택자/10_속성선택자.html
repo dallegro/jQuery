@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>10_속성선택자</title>
+
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        //속성선택자 : 요소를 선택해서 속성을 변경
+
+        $(document).ready(function() {
+            $('body').click(function() {
+
+                //1. li>a의 속성 href="#page2"인 것을 선택하여 밑줄 제거, 글자 빨간색 변경
+
+                $('li>a[href=#page2]').css({
+                    textDecoration: "none",
+                    color: "red"
+                });
+
+
+                //2. li>a의 속성 href값 중 "http"로 시작하는 것을 모두 선택하여 글자색 lime, 글자 그림자 넣기
+                //시작이 같은 것 찾기 : ^=
+
+                $('li>a[href^=http]').css({
+                    color: "lime",
+                    textShadow: "1px 1px 1px #333"
+                });
+
+                //3. li>a의 속성 href값 중 ".com"으로 끝나는 것을 찾아 배경색 변경
+                //끝이 같은 것 찾기 : $=, 따옴표!
+                $('li>a[href$=".com"]').css({
+                    backgroundColor:"hotpink"
+                });
+                
+                //4. li>a의 속성 href값 중 "2"라는 값이 포함되면 선택하여 테두리를 변경
+                //같은 값 모두 찾기: *=
+                $('li>a[href*=2]').css({
+                    border: "3px dotted dodgerblue"
+                });
+                
+                //5. img 태그 중 src값이 "image/summer2.jpg"가 아닌 것을 선택하여 테두리 변경
+                //같지 않다, 즉 다르다 : !=
+                $('img[src!="image/summer2.jpg"]').css({
+                    border : "5px solid blue"
+                })
+                
+                //6. a태그 중 class속성이 있기만 하면 선택하여 글자크기를 28px로 변경
+                $('a[class]').css({
+                    fontSize: "28px"
+                });
+                
+                //7. 모든 태그 중에서 src속성과 alt 속성을 동시에 가지고 있는 것을 선택하여 border-radius 값 변경
+                $('[src][alt]').css({
+                    borderRadius:"30px"
+                })
+                
+            }); ///click()
+
+
+
+        }); ///jQuery
+    </script>
+
+
+</head>
+
+<body>
+    <ul>
+        <li><a href="http://www.greenart.co.kr" title="그린컴퓨터아카데미" id="main" class="">그린컴퓨터아카데미</a></li>
+        <li><a href="http://www.yes24.com" title="yes24" class="manu">예스24</a></li>
+        <li><a href="https://www.aladin.co.kr" title="aladin">알라딘</a></li>
+        <li><a href="#page2" title="page2">2페이지로 이동</a></li>
+    </ul>
+
+
+    <div id="gallery">
+        <img src="image/summer1.jpg" alt="" width="200">
+        <img src="image/summer2.jpg" alt="" width="200">
+    </div>
+</body></html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>dropdown_menu1</title>
+        
+        <script src="jquery-1.12.4.min.js"></script>
+        <script>
+        
+            $(function(){
+                
+                $('ul.gnb>li').mouseenter(function(){
+                    $('div.sub_wrap').slideDown();
+                });
+                
+                $('nav').mouseleave(function(){
+                    $('div.sub_wrap').stop().slideUp();
+                });
+                
+                
+            });
+        
+        </script>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            ul,li {
+                list-style: none;
+            }
+            a {
+                text-decoration: none;
+            }
+            .clearfix:after {
+                display: block;
+                content: "";
+                clear: both;
+            }
+            nav {
+                width: 900px;
+                margin: 0 auto;
+            }
+            nav ul.gnb {
+                background-color: black;
+                padding: 10px 0;
+            }
+            nav ul.gnb>li {
+                width: 150px;
+                float: left;
+                text-align: center;
+            } 
+            
+            nav ul.gnb>li>a {
+                color: #fff;
+            }
+            nav ul.gnb>li>a:hover {
+                font-weight: bold;
+            }
+            
+            div.sub_wrap {
+                background-color: #eee;
+                padding: 15px 0;
+                display: none;
+            }
+            div.sub_wrap>ul {
+                width: 150px;
+                float: left;
+                text-align: center;
+            }
+            div.sub_wrap>ul>li {
+                padding: 5px 0;
+            }
+            div.sub_wrap>ul>li a {
+                color: black;
+            }
+            div.sub_wrap>ul>li a:hover {
+                text-decoration: underline;
+            }
+        
+        
+        </style>
+    </head>
+    <body>
+        <nav>
+            <ul class="gnb clearfix">
+                <!--global navigation bar-->
+                <li><a href="#">Main-menu1</a></li>
+                <li><a href="#">Main-menu2</a></li>
+                <li><a href="#">Main-menu3</a></li>
+                <li><a href="#">Main-menu4</a></li>
+                <li><a href="#">Main-menu5</a></li>
+                <li><a href="#">Main-menu6</a></li>
+            </ul>
+            
+            <div class="sub_wrap clearfix">
+                <ul>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                </ul>
+            </div>
+            
+        </nav>
+        
+    </body>
+</html>

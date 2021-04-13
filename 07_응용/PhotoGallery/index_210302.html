@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Photo Gallery</title>
+    
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            background-color: #000;
+            overflow: hidden;
+        }
+        
+        /*갤러리 타이틀*/
+        .title {
+            font: bold 3.2em arial;
+            text-align: center;
+            color: #fff;
+            margin-top: 100px;
+        }
+        
+        /*갤러리 박스*/
+        #gallery {
+            width: 950px;
+            margin: 50px auto;
+            outline: 2px solid lime;
+            overflow: hidden;
+        }
+        
+        /*각 갤러리 박스 공통*/
+        .photobox {
+            width: 180px;
+            height: 250px;
+            margin: 5px;
+            position: relative;
+            float: left;
+        }
+        .photobox img {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .cover {
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: .5;
+        }
+        
+        /*이미지 설명 박스*/
+        .txt {
+            color: #fff;
+            width: 100%;
+            height: 30%;
+            background-color: rgba(0,0,0,0.5);
+            position: absolute;
+            left: 0;
+            top: 100%;
+            text-align: center;
+            font: 0.75rem/4.375rem "맑은 고딕", "굴림";
+            white-space: nowrap;
+        }
+    
+        /*큰 이미지보기 배경박스 - modal*/
+        #big {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(255,255,255,0.9);
+            display: none;
+        }
+        
+        #big>a>span {
+            display: none;
+        }
+        
+        /*닫기버튼*/
+        .cbtn {
+            width: 40px;
+            height: 39px;
+            position: absolute;
+            top: 80px;
+            right: 50px;
+            /*outline: 3px solid red;*/
+            background: url(images/mv_btns.png) no-repeat;
+            background-position: -128px -342px;
+        }
+        
+        /*좌우 이동버튼*/
+        .abtn {
+            width: 56px;
+            height: 110px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: url(images/mv_btns.png) no-repeat;
+        }
+        .left {
+            left: 36px;
+            background-position: -232px 0;
+        }
+        .left:hover {
+            background-position: 0 -220px;
+        }
+        .right {
+            right: 36px;
+            background-position: 0 -102px;
+        }
+        .right:hover {
+            background-position: -165px 0;
+        }
+        
+        /*큰 이미지 박스*/
+        #big-box {
+            position: fixed;
+            height: 70%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+        #big-box img {
+            height: 100%;
+        }
+        
+    
+    </style>
+    
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/jquery.rotate.js"></script>
+    <script>
+        //이미지 설명글 전역변수 셋팅
+        var msg = [
+            "고귀하고 엘레강스한 여자",
+            "시크하고 도도한 여자",
+            "여신같고 신비로운 여자",
+            "환상속에 꿈을 꾸는 여자",
+            "고풍스런 미를 지닌 여자"
+        ];
+        
+        $(function(){
+            
+            //1. 포토박스에 html생성 및 캡션글 세팅
+            for (var i=0; i < 5; i++) {
+                $('#gallery').append(
+                    '<div class="photobox">' +
+                    '<img src="images/mob/' + (i+1) + '.jpg" alt="fashion">' +
+                    '<span class="cover"></span>'+
+                    '<span class="txt">' + msg[i] + '</span>' + 
+                    '</div>'
+                );
+            } //for문
+            
+            //2. 포토박스에 마우스 오버/아웃시 변경 효과주기
+            //대상 : .photobox
+            //기능 : 마우스오버시 커버가 사라지고, 글박스가 하단에서 올라오는 애니메이션, 마우스 아웃시엔 원상복귀
+            $('.photobox').hover(
+                function(){ //마우스 오버
+                    //1) 반투명 커버 사라지기
+                    $('.cover', this).stop().fadeOut(200);
+                    
+                    //2) 글자박스 올라오기
+                    $('.txt', this).stop().animate({
+                        top: '70%'
+                    }, 300);
+                },
+                function(){ //마우스 아웃
+                    $('.cover', this).stop().fadeIn(200);
+                    $('.txt', this).stop().animate({
+                        top: '100%'
+                    }, 300);
+                }
+            
+            ); ///hover 
+            
+            //3. 포토박스 클릭 시 숨겨져 있던 큰 이미지 배경박스와 큰 이미지가 나타나도록 함
+            //대상 : .photobox
+            //이벤트 : click()
+            $('.photobox').click(function(){
+                //1) 큰 배경박스 보이기
+                $('#big').fadeIn(300);
+                
+                //2) 큰 이미지박스에 이미지 넣기
+                //클릭된 썸네일 이미지 src 읽어오기
+                //읽어온 경로에서 "mob/"를 지우고 큰 이미지 경로로 변환
+                
+                var imgsrc = $(this).find('img').attr('src').replace('mob/', '');
+                //replace(바꿀문자, 바뀔문자)
+                
+                console.log('이미지경로: ' + imgsrc);
+                
+                //썸네일 텍스트 정보 알아내기
+                var thtxt = $(this).find('.txt').text();
+                console.log('썸네일텍스트: '+thtxt);
+                
+                $('#big-box').html('<img src="' + imgsrc + '" alt="big image"><h3>' + thtxt + '</h3>').fadeIn(300);
+                
+            }); //click .photobox
+            
+            
+            //4. 닫기 버튼 클릭 시 큰 이미지 배경박스와 이미지 박스 사라지게 하기
+            //대상 : .cbtn
+            //기능 : modal 창 fadeOut
+            
+            $('.cbtn').click(function(){
+                $('#big, #big-box').fadeOut(300);
+            }); //click .cbtn
+            
+            
+            //5. 닫기 버튼 마우스 오버 시 버튼 회전
+            $('.cbtn').hover(
+                function(){
+                    $(this).stop().animate({
+                        rotate: '-90deg'
+                    },200);
+                },
+                function(){
+                    $(this).stop().animate({
+                        rotate: '0deg'
+                    },200);
+                }
+            ); //hover
+            
+            
+            //6. 이동버튼 클릭 시 이전/다음 이미지로 변경하기
+            //대상 : .abtn
+            //기능 : 왼쪽 버튼은 이전 이미지, 오른쪽 버튼은 다음 이미지로 변경
+            
+            $('.abtn').click(function(){
+                var idx = $(this).index('.abtn');
+                console.log('버튼순번: '+idx);
+                
+                //1) 현재 보이는 큰 이미지의 src값에서 이미지 숫자만 추출하기
+                // images/1.jpg >> 숫자만!
+                var imgno = $('#big-box img').attr('src');
+                imgno = imgno.split('/')[1].split('.')[0];
+                imgno = Number(imgno); //숫자형데이터 변환
+                console.log('이미지번호: '+imgno);
+                
+                //2) 갤러리 이미지 박스 개수 구하기(마지막 번호)
+                var lastno = $('.photobox').length;
+                console.log('갤러리 박스개수: '+lastno);
+                
+                //3) 왼쪽 버튼 클릭 시 1씩 감소, 오른쪽 버튼 클릭 시 1씩 증가
+                if(idx === 0){
+                    //왼쪽 버튼 클릭!!!!
+                    imgno--;
+                    if(imgno < 1) imgno=lastno; //마지막 번호로 보냄!
+                    
+                }else if(idx === 1){
+                    //오른쪽 버튼 클릭!!!
+                    imgno++;
+                    if(imgno > lastno) imgno=1; //첫번째 번호로 보냄!
+                }
+                
+                //4) 변경된 번호로 이미지 다시 넣기
+                $('#big-box').html('<img src="images/' + imgno + '.jpg" alt="big image"><h3>' + msg[imgno - 1] + '</h3>');
+                
+                
+            }); //click .abtn
+            
+            
+            
+        }); //jQuery
+    
+    
+    
+    
+    </script>
+</head>
+<body>
+    
+    <h1 class="title">Fashion Gallery</h1>
+    
+    <!--갤러리박스-->
+    <div id="gallery">
+        <!--jQuery로 추가할 부분 .photobox-->
+        <!--<div class="photobox">
+            <img src="images/mob/1.jpg" alt="fashion">
+            <span class="cover"></span>
+            <span class="txt">고귀하고 엘레강스한 여자</span>
+        </div>-->
+    </div>
+    
+    <!-- 큰이미지 보기 배경박스 : modal -->
+    <div id="big">
+        <a href="#" class="cbtn"><span>닫기버튼</span></a>
+        <a href="#" class="abtn left"><span>왼쪽이동버튼</span></a>
+        <a href="#" class="abtn right"><span>오른쪽이동버튼</span></a>
+    </div>
+    
+    <!--큰이미지 박스-->
+    <div id="big-box">
+        <!--<img src="images/1.jpg" alt="fashion">-->
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</body>
+</html>

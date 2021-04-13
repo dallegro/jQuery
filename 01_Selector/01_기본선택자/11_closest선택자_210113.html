@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>11_closest선택자</title>
+    
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        //가장 가까운 상위요소 선택자 : 선택한 요소를 기준으로 가장 가까운 상위 요소만 선택
+        //기본형 : $("요소선택").closet("요소선택");
+        
+        $(function(){
+            
+            $('.txt1').closest('div').css({
+                border:"2px solid #f00",
+                backgroundColor:"yellow"
+            });
+            
+        }); //jQuery
+    
+    </script>
+</head>
+<body>
+    <h1 class="title">선택자</h1>
+    <div>
+        <div>
+            <h2>상위요소 선택자</h2>
+        </div>
+        <div>
+            <p class="txt1">내용</p>
+        </div>
+    </div>    
+    
+</body>
+</html>

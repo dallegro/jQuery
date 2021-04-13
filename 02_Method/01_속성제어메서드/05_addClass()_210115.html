@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>05_addClass()</title>
+    
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        //addClass() : 선택한 요소에 클래스를 생성
+        //기본형 : $("요소선택").addClass("class값");
+        //class값은 하나만 쓸 수 있다!
+    
+        $(function(){
+            $('button').click(function(){
+                //$('p:first').attr('class','under');
+                $('p:last').addClass('under');
+            });
+        });
+    
+    </script>
+    
+    <style>
+        .intro {
+            font-size: 2em;
+            color: red;
+        }
+        .under {
+            text-decoration: underline;
+            font-style: italic;
+            color: darkseagreen;
+        }
+    
+    </style>
+</head>
+<body>
+    <h1>This is a heading.</h1>
+    
+    <p class="intro">This is a paragraph.</p>
+    <p>This is another paragraph.</p>
+    
+    <button>Add class</button>
+</body>
+</html>

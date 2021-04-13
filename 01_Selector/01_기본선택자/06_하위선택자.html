@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>06_하위선택자</title>
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        //기준요소의 하위요소만 선택
+        //기본형 : $("기준요소 요소선택1")
+        //ex) $("#wrap h1") >> id=wrap인 요소가 기준!
+        
+        $(function(){
+           $('wrap h1').css({
+               "background-color": "yellow",
+               "border": "2px dashed #f00",
+               "color": "red"
+           });
+        });
+        
+        
+        
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <h1>인접 관계 선택자</h1>
+        <p>내용</p>
+        <section>
+            <h1>하위 요소 선택자</h1>
+            <p>내용2</p>
+        </section>
+    </div>
+</body>
+
+</html>

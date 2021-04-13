@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>02_has선택자</title>
+
+    <script src="jquery-1.7.2.min.js"></script>
+    <script src="jquery-ui-1.8.23.custom.min.js"></script>
+    <script>
+        //has() 선택자 : 선택한 요소 중 지정한 태그를 포함하는 요소만 선택
+        //기본형 : $("요소선택:has(태그명)") / $("요소선택").has("태그명")
+
+        //예제1
+        $(document).ready(function() {
+            $("#inner_1 p:has(strong)").css({
+                backgroundColor: "yellow",
+                fontSize: "30px"
+            });
+        });
+
+
+        //예제2
+
+
+        //나타난 뒤 글자가 크게 변함 (글자색 : 노란색)
+        //body를 바나나 배경으로 채움
+
+        /* animate() 메서드
+        기본형 : animate({CSS설정},시간,이징easing,함수)
+        특징 : 트랜지션을 주지 않아도 css 변경사항을 애니메이션 해주는 JQuery 대표 메서드!
+        */
+
+        $(function() {
+            //미션 : #container를 클릭하면
+            $("#container").click(function() {
+                //1. span태그를 포함하고 있는 li를 선택하여 글자크기를 9px로 2초간 애니메이션
+                $("li:has(span)").animate({
+                        fontSize: "9px"
+                    }, 2000)
+
+                    //2. 0.5초간 사라지게 하고
+                    .hide(500, function() { //hide 후 실행코드
+                        //3. 숨긴 상태에서 텍스트 추가
+                        $(this).text("내가 이러니 바나나 안 바나나!!!!!")
+                            //4. 0.5초 동안 나타나게 하고
+                            .show(500)
+
+                            //5. 글자크기를 72px, 글자는 노란색, 글자 그림자를 애니메이션 적용
+                            .animate({
+                                fontSize: "72px",
+                                color: "yellow",
+                                textShadow: "1px 1px #333"
+                            }, 2000, function() {
+                                //6. body를 바나나 배경으로 채우기!
+                                $("body").css({
+                                    backgroundImage: "url(img/banana.jpg)",
+                                    backgroundSize: "200px"
+                                }); ///css
+                            }); ///animate
+
+
+                    }); ///hide
+
+
+            }); ///click
+
+        }); ///jQuery
+    </script>
+
+</head>
+
+<body>
+    <!--예제1-->
+    <!--<div id="outer_wrap">
+      <h1>상태선택자</h1>
+       <section id="inner_1">
+           <h1>has() - 1</h1>
+           <p><span>내용1</span></p>
+           <p><strong>내용2</strong></p>
+           <p><span>내용3</span></p>
+       </section>
+       
+       <section id="inner_2">
+           <h1>has() -2</h1>
+           <p>내용4</p>
+           <p>내용5</p>
+           <p>내용6</p>
+       </section>
+   </div>-->
+
+
+    <!--예제2-->
+    <div id="container">
+
+        <div>Banana Show</div>
+
+        <ul class="nav1">
+            <li>apple</li>
+            <li><span>banana</span></li>
+            <li>grape</li>
+        </ul>
+
+        <ul class="nav2">
+            <li>바나나우유</li>
+            <li>바나나킥</li>
+            <li>바나나아이스크림</li>
+        </ul>
+    </div>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>dropdown_menu3</title>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        //1. 대메뉴(depth01)에 마우스를 올렸을 때, 서브메뉴 slideDown
+        //2. 스크롤되었을 때 메뉴영역(nav) 배경색 변경 - 흰색, 투명도
+
+
+        $(function() {
+            //.depth01>li에 마우스를 올렸을때
+            $('.depth01>li').mouseenter(function() {
+                $(this).children('ul.depth02').stop().slideDown();
+            }); //mouseenter
+            //.depth02에 마우스가 떠나면 마우스가 떠난 ul.depth02는 slideUp
+            $('ul.depth01').mouseleave(function() {
+                $('ul.depth02').stop().slideUp();
+            }); //mouseleave
+
+
+            //2. 스크롤되었을 때 메뉴영역(nav) 배경색 변경 - 흰색, 투명도
+            $(window).scroll(function() {
+                //윈도우가 스크롤될 때 이벤트 발생
+                
+                var winTop = $(window).scrollTop();
+                var navH =$('nav').height();
+                
+                console.log('scrollTop높이: ' +winTop);//0
+                console.log('nav높이: '+navH);//58
+                if(navH<winTop){
+                    //window높잇값이 nav보다 클 때 >> nav 높이 이상으로 스크롤 되었을 때!
+                    $('nav').addClass('on');
+                }else{
+                    $('nav').removeClass('on');
+                }
+                
+            }); //scroll
+
+        }); //jQuery
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        body {
+            height: 1500px;
+            background: url(illom1.jpg) no-repeat top center;
+        }
+
+        nav {
+            background: transparent;
+            text-align: center;
+            font-size: 14px;
+            width: 100%;
+            border-bottom: 1px solid #ccc;
+            position: fixed;
+        }
+        
+        /*window가 스크롤되었을 때 추가할 클래스*/
+        nav.on{
+            background-color: rgba(255,255,255,0.9);
+        }
+        
+        nav ul.depth01 {
+            width: 1050px;
+            margin: 0 auto;
+            text-align: center;
+
+        }
+
+        nav ul.depth01:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        nav ul.depth01>li {
+            float: left;
+            width: 150px;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        nav>ul.depth01>li>a {
+            color: black;
+            font-weight: bold;
+        }
+
+        nav>ul.depth01>li>ul.depth02 {
+            background-color: #333;
+            width: 150px;
+            position: absolute;
+            left: 0;
+            top: 58px;
+            display: none;
+            /*CSS 끝난후*/
+        }
+
+        nav>ul.depth01>li>ul.depth02>li {
+            padding: 10px 0;
+
+        }
+
+        nav>ul.depth01>li>ul.depth02>li>a {
+            color: #fff;
+        }
+
+        nav>ul.depth01>li>ul.depth02>li>a:hover {
+            text-decoration: underline;
+            color: yellowgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul class="depth01">
+            <li>
+                <a href="#">침실</a>
+                <ul class="depth02">
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">거실</a>
+                <ul class="depth02">
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">주방</a>
+                <ul class="depth02">
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">키즈룸</a>
+                <ul class="depth02">
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">학생방</a>
+                <ul class="depth02">
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">서재</a>
+                <ul class="depth02">
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">시리즈</a>
+                <ul class="depth02">
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</body></html>

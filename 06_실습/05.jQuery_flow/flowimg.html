@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>flowImg</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        var msg = "";
+        var change = String(input.value);
+
+        var kor = ['영', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구', '십', '점'];
+        var num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
+
+
+        for (let i = 0; i < input.length; i++) {
+            for (let j = 0; j < num.length; j++) {
+                if (change.charAt[i] == num[j]) {
+                    msg += kor[j];
+                } else {
+                    msg = "숫자를 입력해주세요";
+                }
+                
+                        for (var i = 1; i <= 100; i++) {
+            if (i % 5 == 00 && i % 7 == 00) { //5의 배수이면서 7의 배수
+                document.write('<span style="color:pink;">' + i + '</span> ');
+            } else if (i % 5 == 0) {
+                document.write('<span style="color:red;">' + i + '</span> ');
+            } else if (i % 7 == 00) {
+                document.write('<span style="color:green">' + i + '</span> ')
+            }
+        };
+        document.write('<hr>');
+    </script>
+</head>
+
+<body>
+    <div id="cont1">
+        <ul>
+            <li>
+                <h1>NEW ARRIVAL</h1>
+            </li>
+            <li>
+                <ol class="flowImg">
+                    <li class="m1">
+                        <a href="#"><img src="images/m1.png" alt="신상품"></a>
+                    </li>
+                    <li class="m2">
+                        <a href="#"><img src="images/m2.png" alt="신상품"></a>
+                        <!--<div class="ibox">
+                            [남성]카모전판프린트 PQ티셔츠<br>DMTS7K731-MG<br>99,000원
+                        </div>-->
+                    </li>
+                    <li class="m3">
+                        <a href="#"><img src="images/m3.png" alt="신상품"></a>
+                    </li>
+                    <li class="m4">
+                        <a href="#"><img src="images/m4.png" alt="신상품"></a>
+                    </li>
+                    <li class="m5">
+                        <a href="#"><img src="images/m5.png" alt="신상품"></a>
+                    </li>
+                    <li class="m6">
+                        <a href="#"><img src="images/m6.png" alt="신상품"></a>
+                    </li>
+                    <li class="m7">
+                        <a href="#"><img src="images/m7.png" alt="신상품"></a>
+                    </li>
+                    <li class="m8">
+                        <a href="#"><img src="images/m8.png" alt="신상품"></a>
+                    </li>
+                    <li class="m9">
+                        <a href="#"><img src="images/m9.png" alt="신상품"></a>
+                    </li>
+                </ol>
+            </li>
+
+        </ul>
+    </div>
+</body>
+
+</html>

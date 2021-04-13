@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>03_prepend()</title>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        //prepend(), prependTo() : 선택한 요소의 하위요소 앞 위치에 새 요소를 생성
+        //$("요소선택").prepend("새 요소");
+        //$("새 요소").prependTo("요소선택");
+        
+        
+        //예제1
+        $(function(){
+            $('#listZone').prepend('<li>내가 처음 prepend!!!!! </li>');
+            
+        });
+        
+        
+        //예제2 
+        //미션 : p태그의 글자를 클릭하면 #pic 요소의 내부에 자식요소로 웹 경로 이미지가 번갈아 앞쪽에 추가되게 하시오.
+        $(function(){
+            
+            //이미지를 담는 배열변수
+            var imgs= ["https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMTJfMjAw%2FMDAxNjEwNDQ3ODYzMTMy.9F8c-m1y5DluNCHookaWnPKA8EDU-H2O0q2MUQ-HR30g.s7PbI5RQuGazBTpITW4vduOx3RhXyssbzBmvctPue5wg.JPEG.pinkmam0904%2F%25B4%25D9%25BF%25EE%25B7%25CE%25B5%25E5%25C6%25C4%25C0%25CF%25A3%25AD5.jpg&type=sc960_832", "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDExMTFfMjkg%2FMDAxNjA1MDYxNjk3ODE5.bwjUWQQq8zhPd0lGHLHICdqp3sGsWerYCwVN6-71OvEg.MBP6osz0JYs_Y0FDtg31IPdgB_urReJqUOP5aOPinoIg.JPEG.chcir77%2F20201111_021902.jpg&type=sc960_832"];
+            
+            var seq = 0; //배열 순번 변수
+            
+            $('#container').find('p').click(function(){
+                
+                //이미지 넣기(#pic)
+                $('#pic').prepend('<img src="' + imgs[seq] +'" alt="">');
+                
+                //이미지 순번 번갈아 바꾸기 (삼항조건연산자)
+                seq === 0 ? seq = 1 : seq = 0;
+                
+                $('#pic img').css({
+                    width: "150px"
+                });
+            }); /// click()
+        }); ///jQuery
+        
+        
+    
+    </script>
+</head>
+<body>
+   <!--예제1-->
+   <ul id="listZone">
+       <li>리스트1</li>
+       <li>리스트2</li>
+       <li>리스트3</li>
+       <li>리스트4</li>
+       <li>리스트5</li>
+   </ul>
+   
+   
+   <!--예제2-->
+   <div id="container">
+       <p>당신이 좋아하는 사진 2장을 번갈아 앞쪽에 추가해 보세요. (나를 클릭하세요!!!!)</p>
+       <div id="pic">
+           <!--<img src="" alt="">-->
+       </div>
+   </div>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    
+</body>
+</html>

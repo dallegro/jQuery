@@ -1,0 +1,7 @@
+attribute Method
+-toggelClass : addClass() removeClass()
+
+**Effect Method**
+1. show() hide() - toggle()
+2. fadeIn() fadeOut() - fadeToggle()
+3. slideUp() slideDown() - slideToggle()

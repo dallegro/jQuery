@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>03_not선택자</title>
+    
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        //not()선택자는 선택한 요소 중 지정한 요소만 제외한 채 선택
+        //$("요소선택:not(제외할 요소 선택)") / $("요소선택").not("제외할 요소")
+        
+        //예제1
+        $(function(){
+            //#inner_2 p에서 첫번째 요소만 제외하고 선택
+            $("#inner_2 p").not(":first").css({
+                color:"#f00",
+                fontWeight: "bold"
+            });
+        });
+    
+    
+        //예제2 
+        //li를 클릭하면, 클릭된 li를 "야옹"이라고 글자를 변경
+        //변경된 글자는 글자크기 72px, 빨간색으로 변경
+        //동시에 나머지 li는 사라지도록 하시오.
+        
+        $(document).ready(function(){
+            
+            $("li").click(function(){
+                $(this).text("야옹!").css({
+                    fontSize: "72px",
+                    color: "red",
+                    transition:"all .8s"
+                }); ///css
+                
+                //선택된 li순번구하기
+                var idx = $(this).index(); //index() : 순번구하기
+                console.log("클릭된 li의 순번: "+idx);
+                
+                //선택된 li를 제외한 나머지 li 숨기기
+                $("li:not(:eq("+idx+"))").hide(800);
+                
+            }); ///click
+            
+        }); ///jQuery
+    
+    
+    </script>
+</head>
+
+<body>
+    <!--예제1-->
+    <!--<div id="outer_wrap">
+        <h1>상태 선택자</h1>
+        <section id="inner_1">
+            <h1>not() - 1</h1>
+            <p><span>내용1</span></p>
+            <p><strong>내용2</strong></p>
+            <p><span>내용3</span></p>
+        </section>
+        <section id="inner_2">
+            <h1>not() - 2</h1>
+            <p>내용4</p>
+            <p>내용5</p>
+            <p>내용6</p>
+        </section>
+    </div>-->
+
+
+    <!--예제2-->
+    
+    <div id="container">
+        <ul class="nav">
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+            <li>고양이</li>
+        </ul>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+
+
+</body>
+
+</html>

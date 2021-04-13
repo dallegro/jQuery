@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>1cutslide-1</title>
+        
+        <script src="jquery-1.12.4.min.js"></script>
+        <script>
+            $(function(){
+                //초기설정
+                //.slider ul의 css속성값 설정
+                $('.slider ul').css('width', $('.slider ul li').width() * $('.slider ul li').size());
+                
+                //css값 출력해보기
+                var test = $('.slider ul li').width() * $('.slider ul li').size(); //width() 800 * size() 4 = 3200
+                console.log(test);
+                
+                //마지막 li를 첫 번째로 이동
+                $('.slider ul li:last').prependTo('.slider ul');
+                
+                //현재 4번 이미지가 보여지고 있으므로, li 한 칸의 가로너비만큼 margin-left 처리
+                $('.slider ul').css('margin-left', -$('.slider ul li').width());
+                
+                var chW = $('.slider ul li').width(); //800
+                console.log('margin-left: -'+chW);
+                
+                
+                //prevBtn(이전)
+                $('.prevBtn').click(function(){
+                    
+                    $('.slider ul').animate({
+                        marginLeft: '+=' + chW
+                    }, 'slow', function(){ //animate 후 실행
+                        
+                        $('.slider ul li:last').prependTo('.slider ul');
+                        $('.slider ul').css('margin-left', -chW);
+                         
+                        
+                    }); //animate
+                    
+                    
+                }); //prevBtn click()
+                
+                
+                //nextBtn(다음)
+                $('.nextBtn').click(function(){
+                    
+                    $('.slider ul').animate({
+                        marginLeft: '-=' + chW
+                    }, 'slow', function(){
+                        $('.slider ul li:first').appendTo('.slider ul');
+                        $('.slider ul').css('margin-left',-chW);
+                    }); //animate()
+                    
+                }); //nextBtn click()
+                
+                
+                
+                
+            }); //jQuery
+        
+        
+        
+        
+        
+        </script>
+        <style>
+            
+            body {background-color: navy;}
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            ul,li {
+                list-style: none;
+            }
+            .all_wrap {
+                width: 800px;
+                margin: 50px auto;
+                position: relative;
+            }
+            .all_wrap>p {
+                width: 50px;
+                height: 50px;
+                position: absolute;
+                top: 50%;
+                margin-top: -25px;
+            }
+            .all_wrap>p.prevBtn {
+                left: 20px;
+            }
+            .all_wrap>p.nextBtn {
+                right: 20px;
+            }
+            
+            
+            /*이미지 슬라이더*/
+            .slider {
+                width: 800px;
+                /*overflow: hidden;*/
+                outline: 5px solid lime;
+            }
+            
+            /*제이쿼리에서 초기설정으로 처리*/
+            .slider ul {
+                /*width: 3200px;*/ /*float된 자식 4개가 한 줄에 나열*/
+            }
+            .slider ul:after {
+                content: "";
+                display: block;
+                clear: both;
+            }
+            .slider ul li {
+                float: left;
+            }
+            .slider img {
+                width: 800px;
+            }
+            
+        
+        
+        </style>
+    </head>
+    <body>
+        <div class="all_wrap">
+            <p class="prevBtn"><a href="#"><img src="images/arrow_left.png" alt=""></a></p>
+            <p class="nextBtn"><a href="#"><img src="images/arrow_right.png" alt=""></a></p>
+            
+            <div class="slider">
+                <ul>
+                    <li><img src="images/slide-1.jpg" alt=""></li>
+                    <li><img src="images/slide-2.jpg" alt=""></li>
+                    <li><img src="images/slide-3.jpg" alt=""></li>
+                    <li><img src="images/slide-4.jpg" alt=""></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
+

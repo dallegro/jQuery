@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>ShowImg Caption</title>
+        
+        <script src="jquery-1.12.4.min.js"></script>
+        <script>
+            $(function(){
+                
+                //썸네일 설명 em태그 숨기기
+                $('.thumbs em').hide(); //display:none
+                
+                //썸네일을 클릭하면 큰 이미지가 변경되고
+                //해당 설명(캡션)이 올라옴
+                
+                $('.thumbs a').click(function(e){
+                    
+                    //a태그 이동 막기
+                    e.preventDefault();
+                    
+                    //1. 큰 이미지 변경하기
+                    var imgsrc = $(this).attr('href');
+                    $('#largeImg img').attr('src', imgsrc);
+                    
+                    //2. 캡션글(em태그 내용) 읽어와서
+                    //div#caption을 만들어서 이미지박스(#largeImg) 자식으로 추가
+                    var txt = $(this).next().text();
+                    console.log(txt);
+                    
+                    //#caption을 추가하기 전에 지우기(remove)
+                    $('#caption').remove();
+                    
+                    $('#largeImg').append('<div id="caption"></div>');
+                    
+                    //#caption에 텍스트 넣기
+                    $('#caption').text(txt);
+                    
+                    //#caption의 텍스트가 들어간 후 높이값을 구해서 넣기
+                    var currH = $('#caption').innerHeight();
+                    console.log("현재 캡션박스 높이값: "+currH);
+                    
+                    //#caption의 top값을 변경하여 애니메이션 하기
+                    $('#caption').animate({
+                        top: -currH+'px'
+                    },300);
+                    
+                    
+                }); ///click
+                
+                
+            }); ///jQuery
+        
+        
+        </script>
+        
+        <style>
+            body {
+                width: 620px;
+                margin: 20px auto;
+                padding: 0;
+                background: #192839;
+            }
+            .thumbs {
+                width:100px;
+                float: left;
+            }
+            .thumbs img {
+                border: 1px solid #ccc;
+                padding: 5px;
+                margin-bottom: 3px;
+            }
+            .thumbs img:hover {
+                border-color: #ef4018;
+            }
+            #largeImg {
+                width: 500px;
+                height: 280px;
+                padding: 5px;
+                border: 1px solid #ccc;
+                margin-left: 110px;
+                overflow: hidden;
+            }
+            
+            #caption {
+                background: url(captionBg.png) repeat-y;
+                /*height: 50px;*/
+                padding: 10px;
+                /*border: 1px solid #ccc;*/
+                color: white;
+                position: relative;
+            }    
+            
+        
+        
+        
+        </style>
+    </head>
+    <body>
+       <div class="thumbs">
+           <a href="images/pic1.jpg"><img src="images/th_pic1.jpg" alt=""></a>
+           <em>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</em>
+           
+           <a href="images/pic2.jpg"><img src="images/th_pic2.jpg" alt=""></a>
+           <em>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</em>
+           
+           <a href="images/pic3.jpg"><img src="images/th_pic3.jpg" alt=""></a>
+           <em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in dignissim nulla.</em>
+       </div>
+       
+       <div id="largeImg">
+           <img src="images/pic1.jpg" alt="">
+           <!--<div id="caption">Caption</div>-->
+       </div>
+        
+    </body>
+</html>

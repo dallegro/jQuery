@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>img-replacement_ready</title>
+        
+        <style>
+            body {
+                width: 580px;
+                padding: 0;
+                margin: 20px auto;
+            }
+            #largeImg {
+                width: 550px;
+                height: 400px;
+                padding: 5px;
+                border: 1px solid #ccc;
+            }
+        
+            .thumbs img {
+                width: 100px;
+                height: 100px;
+                padding: 4px;
+                border: 1px solid #ccc;
+            }
+            .thumbs img:hover {
+                border-color: #ff9900;
+            }
+            .thumbs img.active {
+                border-color: #ff9900;
+                border-width: 3px;
+            }
+        
+        
+        
+        
+        </style>
+        
+        <script src="jquery-1.12.4.min.js"></script>
+        <script>
+        
+            $(function(){
+                
+                $('.thumbs a').click(function(event){
+                    
+                    event.preventDefault(); 
+                    
+                    //클릭된 a의 href 속성을 변수에 담기
+                    var changeImg = $(this).attr('href');
+                    //alert(changeImg);
+                    
+                    //큰 이미지 위치에 src 속성 바꾸기
+                    $('#largeImg').attr('src',changeImg);
+                    
+                    //선택된 썸네일에 .active 추가하기
+                    $('.thumbs a img').removeClass('active');
+                    $(this).children('img').addClass('active');
+                    
+                }); //click
+                
+            }); //jQuery
+        
+        
+        
+        </script>
+    </head>
+    <body>
+        <h2>Illustrations</h2>
+        
+        <div><img id="largeImg" src="images/img1-lg.jpg" alt="Large Img"></div>
+        
+        <div class="thumbs">
+            <a href="images/img2-lg.jpg" title="Image2"><img src="images/img2-thumb.jpg" alt=""></a>
+            <a href="images/img3-lg.jpg" title="Image3"><img src="images/img3-thumb.jpg" alt=""></a>
+            <a href="images/img4-lg.jpg" title="Image4"><img src="images/img4-thumb.jpg" alt=""></a>
+            <a href="images/img5-lg.jpg" title="Image5"><img src="images/img5-thumb.jpg" alt=""></a>
+            <a href="images/img6-lg.jpg" title="Image6"><img src="images/img6-thumb.jpg" alt=""></a>
+        </div>
+        
+        
+    </body>
+</html>

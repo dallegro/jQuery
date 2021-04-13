@@ -1,0 +1,114 @@
+@charset "utf-8";
+
+/**reset css 연결**/
+@import url(reset.css);
+
+/*base.css*/
+a {
+    text-decoration: none;
+    color: #999;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+}
+html,body {
+    width: 100%;
+    height: 100%;
+}
+body {
+    font: 14px Gulim; 
+    overflow-x:hidden;
+}
+
+/**main.css***********/
+#cont1 {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#cont1>ul {
+    width: 100%;
+    height: 100%;
+}
+#cont1>ul>li:first-child {
+    line-height: 100px;
+    margin-left: 50px;
+    font-size: 30px;
+}
+#cont1>ul>li:last-child {
+    position: relative;
+     width: 100%;
+    height: 70%;
+}
+
+/*흘러가는 이미지*/
+#cont1 .flowImg {
+    width: 200%;
+    position: relative;
+    left: 0;
+}
+#cont1 .flowImg>li {
+    width: 10%;
+    position: relative; /*.ibox의 부모*/
+}
+#cont1 .flowImg img {
+    width: 100%;
+}
+
+/*신상품 정보박스*/
+.ibox {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    background-color: #101629;
+    color: #fff;
+    padding: 20px 0;
+    top: 60%;
+    opacity: 0;
+    /*top: 100%;*/
+}
+.ibox:before {
+    /*안쪽 테두리 만들기*/
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #fff;
+    transform: scaleX(0.92) scaleY(0.8);
+}
+.ibox:after {
+    /*삼각형 화살표*/
+    content: "";
+    display: block;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid #101629;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

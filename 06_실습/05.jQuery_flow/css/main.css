@@ -1,0 +1,119 @@
+@charset 'utf-8';
+
+
+/**CSS연결**/
+@import url(reset.css);
+
+/*기본 CSS - base.css*/
+/*공통 CSS - common.css*/
+
+a {
+    text-decoration: none;
+    color: #999;
+}
+
+a:hover {
+    color: #666;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-size: : 100%;
+}
+
+/**MAIN****************/
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    font: 14px Gulim;
+}
+
+#cont1 {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#cont1 > ul {
+    width: 100%;
+    height: 100%;
+}
+
+#cont1 > ul > li:first-child {
+    font-size: 30px;
+    line-height: 100px;
+    margin-left: 50px;
+}
+
+#cont1 > ul > li:last-child {
+    width: 100%;
+    height: 70%;
+     overflow: hidden;
+}
+
+
+/*흘러가는 이미지 요소*/
+#cont1 .flowImg {
+    width: 200%;
+    position: relative;
+    left: 0;
+}
+
+#cont1 .flowImg li {
+    width: 10%;
+    /*부모크기의 1/10크기>>한 줄에 5개 씩 보이도록 함*/
+    position: relative; /*.ibox의 부모요소*/
+}
+
+#cont1 .flowImg img {
+    width: 100%;
+}
+
+/**신상품 정보 박스**/
+.ibox {
+    width: 100%;
+    background-color: #101629;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    position: absolute;
+    top: 60%;
+    opacity: 0;
+}
+
+.ibox::before{
+    /*안쪽테두리*/
+    width: 100%;
+    height: 100%;
+    display: block;
+    content: "";
+    border: 2px solid #fff;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    transform: scaleX(0.94) scaleY(0.8);
+}
+.ibox::after{
+    /*화살표*/
+    width: 0;
+    height: 0;
+    content: "";
+    display: block;
+    /*삼각형*/
+    
+    border-bottom: 20px solid #101629;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    position: absolute;
+    top: -22%;
+    left: 50%;
+    transform: translateX(-50%);
+}

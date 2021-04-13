@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>09_lt선택자</title>
+    
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        //lt선택자 : 선택한 요소 중 지정한 인덱스보다 작은(less than) 인덱스를 참조하는 요소만 선택
+        //기본형 : $("요소선택:li(index)")
+    
+        $(document).ready(function(){
+            $("#menu li:lt(2)").css({
+                backgroundColor: "indianred"
+            });
+            
+            
+            //미션 : li의 5번째보다 작은 li의 글자를 42px, green색으로 변경
+            $("li:lt(4)").css({
+                fontSize: "42px",
+                color: "green"
+            });
+        });
+        
+        
+    </script>
+</head>
+<body>
+    <h1>lt선택자</h1>
+    <ul id="menu">
+        <li>내용1</li>
+        <li>내용2</li>
+        <li>내용3</li>
+        <li>내용4</li>
+        <li>내용5</li>
+        <li>내용6</li>
+        <li>내용7</li>
+        <li>내용8</li>
+    </ul>
+</body>
+</html>

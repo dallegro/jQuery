@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>09_부모선택자</title>
+    <script src="jquery-1.7.2.min.js"></script>
+    <script src="jquery-ui-1.8.23.custom.min.js"></script>
+    <script>
+        /*1. 부모요소 선택자 : 선택한 요소를 감싸고 있는 부모 요소를 선택
+        기본형 : $("요소선택").parent();
+        
+        2. 상위(부모)요소 선택자2 : 선택한 요소를 기준으로 '모든' 상위 요소를 선택하거나 상위요소 중 선택하고자 하는 요소만 선택할 때 사용
+        *기본형
+        1) $("요소선택").parents();
+        1) $("요소선택").parents("요소선택");
+
+        */
+
+        //예제1
+        $(function() {
+            $('#list_1').parent() //ul
+                .css("border", "2px dashed #f00");
+        });
+
+
+        //예제2
+        $(function() {
+            $('.txt1').parents()
+                .css({
+                    "border": "2px dashed #f00"
+                });
+            $('.txt2').parent()
+                .css({
+                    "border": "2px solid blue"
+                });
+        });
+
+        //예제3 - total
+        $(document).ready(function() {
+            //미션 : p태그를 클릭하면 부모요소의 배경색을 빨간색으로 변경하시오.
+            $('p').click(function() {
+                $(this).parent() //클릭된 p의 부모를 찾아!
+                    .animate({ //움직임을 주는것, 트렌지션과 비슷한 용도
+                        backgroundColor: "red"
+                    }, 500); //0.5초
+
+            }); //click()
+
+            //미션2 :a를 클릭하면 부모들 중 p태그는 배경색을 노란색, div태그는 배경색을 녹색으로 지정하시오.
+            $('a').click(function() {
+                $(this).parents('p').animate({
+                    //animate({css속성}, 소요시간, easing);
+                    backgroundColor: "yellow"
+                },500);
+                $(this).parents('div#sub').animate({
+                    backgroundColor:"green"
+                },500);
+                
+                return false; //값을 반환하고 여기서 끝내! 실행하지마! 라는 뜻
+            });//clcik()
+
+
+
+
+        });
+    </script>
+</head>
+
+<body>
+    <!--예제1:parent()-->
+    <!--<h1>parent 선택자</h1>
+    <ul id="wrap">
+        <li>리스트1
+            <ul>
+                <li id=list_1>리스트1-1</li>
+                <li>리스트1-2</li>
+            </ul>
+        </li>
+        <li>리스트2</li>
+        <li>리스트3</li>
+    </ul>-->
+
+    <!--예제2:parents()-->
+    <!--<h1 class="title">parents 선택자</h1>
+    <section>
+        <div>
+            <p class="txt1">내용</p>
+        </div>
+    </section>
+
+    <section>
+        <div>
+            <p class="txt2">내용</p>
+        </div>
+    </section>-->
+
+    <!--예제3-->
+    <div id="container">
+        <div id="sub">
+            <p>div p
+                <a href="#">div>p>a 눌러봐아~</a>
+            </p>
+        </div>
+
+        <p id="part1">p</p>
+        <p>p</p>
+        <p>p</p>
+
+    </div>
+
+    <style>
+        div,
+        p,
+        a {
+            float: left;
+            margin: 10px;
+            background-color: #fff;
+            display: block;
+
+        }
+
+        div#sub {
+            width: 180px;
+            height: 180px;
+            border: thin solid #000;
+        }
+
+        p {
+            width: 160px;
+            height: 160px;
+            border: thin solid blue;
+
+        }
+
+        a {
+            width: 130px;
+            height: 100px;
+            border: thin solid green;
+        }
+    </style>
+
+</body></html>

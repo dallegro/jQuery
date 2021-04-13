@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>08_scroll()</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        /*scroll() 이벤트 메서드
+        대상 요소의 스크롤바가 이동할 때마다 이벤트를 발생시키거나 강제로 scroll 이벤트 발생
+        
+        $("이벤트대상").scroll(function(){자바스크립트 코드;});
+        $("이벤트대상").on("scroll",function(){자바스크립트 코드;});
+        */
+        
+        
+        $(window).on("scroll", function(){
+            var scTop = $(this).scrollTop();
+            var scLeft = $(this).scrollLeft();
+            
+            $('.top').text(scTop);
+            $('.left').text(scLeft);
+        });
+    
+    
+    </script>
+    
+    <style>
+        body {
+            width: 5000px;
+            height: 10000px;
+        }
+        #wrap {
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            /*background-color: darkseagreen;*/
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <p>scrollTop: <span class="top"></span>px</p>
+        <p>scrollLeft: <span class="left"></span>px</p>
+    </div>
+</body>
+</html>

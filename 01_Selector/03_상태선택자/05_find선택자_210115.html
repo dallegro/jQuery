@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>05_find선택자</title>
+        
+        <script src="jquery-1.7.2.min.js"></script>
+        <script>
+            //find선택자 : 선택한 하위요소 중에서 find()로 필터링한 요소만 선택
+            //기본형 : $("요소선택").find("하위요소 중 필터링할 요소 선택")
+            
+            //예제1
+            $(function(){
+                $("#inner_1").find(".txt1").css({
+                    backgroundColor: "pink"
+                });
+            });
+            
+            
+            //예제2 - #container를 클릭하면 p태그를 모두 찾아서 배경 이미지 넣기
+            $(document).ready(function(){
+                $("#container").click(function(){
+                    $(this).find("p").css({
+                        backgroundImage: "url(img/jeonjihyun.jpg)",
+                        backgroundSize: "cover"
+                    });
+                }); ///click
+            });
+        
+        
+        </script>
+    </head>
+    <body>
+       <!--예제1-->
+        <!--<div id="outer_wrap">
+            <h1>상태선택자</h1>
+            <section id="inner_1">
+                <h2>find() - 1</h2>
+                <p class="txt1">내용1</p>
+                <p class="txt2">내용2</p>
+            </section>
+            <section id="inner_2">
+                <h2>find() - 2</h2>
+                <p>index 0</p>
+                <p>index 1</p>
+                <p>index 2</p>
+                <p>index 3</p>
+            </section>
+        </div>-->
+        
+        <!--예제2-->
+        <div id="container">
+            <div id="sub">
+                <p>div>p태그</p>
+            </div>
+            <p>p태그</p>
+            <p>p태그</p>
+        </div>
+        
+        <style>
+            div, p {
+                float: left;
+                margin: 10px;
+                background-color: bisque;
+            }
+            div#sub {
+                width: 160px;
+                height: 160px;
+                border: 1px solid #000;
+            }
+            p {
+                width: 120px;
+                height: 120px;
+                border: 1px solid #000;
+            }
+        
+        
+        
+        
+        
+        </style>
+        
+        
+        
+        
+        
+    </body>
+</html>

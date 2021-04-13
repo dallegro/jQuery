@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>03_animate()_queue</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script src="jquery-ui-1.8.23.custom.min.js"></script>
+    
+    <script>
+    
+        /*
+        큐(queue)란?
+        - 애니메이션 메서드는 함수가 적용된 순서대로 큐(Queue)라는 저장소(memory)에 저장. 큐에 저장된 애니메이션 대기열이 있다면 먼저 들어간 애니메이션이 먼저 실행 (First In First Out)
+        - 애니메이션과 같은 실행코드를 메모리에 적재하여 실행을 유지할 수 있도록 관리하는 메모리 영역
+        
+        */
+        
+        //미션 : 클래스가 run인 버튼을 클릭하면, 아이디가 box인 요소에 아래의 순서대로 애니메이션 하시오.
+        
+        //1. 현재위치로부터 left:400px 이동, 배경색 red (2초간)
+        //2. 현재위치로부터 top:200px 이동, 배경색 yellow (2초간)
+        //3. 현재위치로부터 top:-100px, left:-100px 이동, 배경색 green (2초간)
+        //4. 현재위치로부터 top:-50px, left:-50px 이동, width :360px, height:200px, 배경색 lime (2초간)
+        //5. 배경이미지를 박스에 넣고 (웹에서 원하는 이미지 가져올 것)
+        //6. 2초 후에 0.5초간 slideUp하여 사라짐
+        
+        
+        $(function(){
+            
+            
+            
+            
+        }); //jQuery
+        
+        
+        
+    
+    </script>
+</head>
+<body>
+   <p><a href="#" class="run">animate()</a></p>
+   <div id="box"></div>
+   
+   <style>
+    
+       div {
+           width: 100px;
+           height: 100px;
+           background-color: darkseagreen;
+           position: relative;
+       }
+    
+    </style>
+   
+   
+   
+    
+</body>
+</html>

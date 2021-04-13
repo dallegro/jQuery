@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>ChangeImg</title>
+    
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        $(function(){
+            //썸네일 클릭 시 메인이미지 src 변경
+            $('.thumbs a').click(function(e){
+                //1. a태그 기본 이동 없애기
+                e.preventDefault();
+                
+                
+                //2. a태그의 href값 구하기
+                var imgsrc=$(this).attr('href');
+                console.log('이미지 경로: '+imgsrc);
+                
+                //3. 이미지 경로값을 대상요소의 src값으로 세팅
+                $('#largeImg img').attr('src', imgsrc);
+                //a태그의 href값을 img태그의 src 로 넣어주기!
+                
+            }); //click
+        }); //jQuery
+    
+    
+    
+    </script>
+    <style>
+        body {
+            padding: 0;
+            background-color: #192839;
+        }
+        .wrap {
+            width: 620px;
+            margin: 20px auto;
+           /* outline: 3px solid lime;*/
+        }
+        .thumbs {
+            width: 100px;
+            float: left;
+        }
+        
+        .thumbs img {
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin-bottom: 3px;
+        }
+        .thumbs img:hover {
+            border-color: #ef4018;
+        }
+        #largeImg {
+            width: 500px;
+            height: 280px;
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin-left: 110px;
+        }
+    
+    
+    
+    </style>
+</head>
+<body>
+    
+    <div class="wrap">
+        <div class="thumbs">
+            <a href="images/pic1.jpg"><img src="images/th_pic1.jpg" alt=""></a>
+            <a href="images/pic2.jpg"><img src="images/th_pic2.jpg" alt=""></a>
+            <a href="images/pic3.jpg"><img src="images/th_pic3.jpg" alt=""></a>
+        </div>
+        
+        <div id="largeImg"><img src="images/pic1.jpg" alt="image1"></div>
+    </div>
+    
+    
+    
+    
+</body>
+</html>

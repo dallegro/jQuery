@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <title>onePage_autoscroll - PageAction</title>
+
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+
+    <script>
+        ////////전역변수 선언/////////////////
+        var pno = 0; //현재 페이지 번호 (첫 페이지 0)
+        const totcnt = 7; //전체 페이지수 (const는 상수, 변하지 않는 값)
+        var prot = 0; //광스크롤막기(0-허용, 1-막기)
+        //////////////////////////////////////
+
+
+        $(function() {
+
+            //새로고침 시 스크롤 위치 처음으로 변경하기
+            $('html,body').stop().delay(500).animate({
+                scrollTop: '0'
+            }, 10);
+
+            //각 페이지별 등장요소 초기 css
+            initSet();
+
+            //페이지 액션 호출!!!!
+            pageAction();
+
+            /*
+            [자동스크롤 구현]
+            스크롤 휠을 위, 아래로 작동시킬 대 페이지가 위, 아래로 자동으로 애니메이션 되게 하는 기능
+            
+            *mousewheel 이벤트 : 마우스 휠을 움직여서 스크롤할 때 발생하는 이벤트!
+            
+            - mousewheel() : IE, 크롬, 사파리, 오페라
+            - wheel : 최근 표준코딩에서 변경된 이벤트명
+              벤더사 공통 표준안이 되지 못해서 ie, 사파리 지원안함
+            - DOMMouseScroll : 파이어폭스 전용 이벤트명  
+            
+            >> 마우스 휠 이벤트를 사용하려면, mousewheel과 DOMMouseScroll을 동시에 사용!
+            
+            */
+
+
+            //마우스 휠 이벤트 - 대상 : 문서(document)
+            $(document).on('mousewheel DOMMouseScroll', function(e) {
+
+                //1. 스크롤 기본기능 막기!
+                e.preventDefault();
+                console.log('휠 스크롤중~~~~~~');
+
+                //스크롤 이동중 잠금!!! 광스크롤 금지
+                if (prot === 1) return false; //돌아가!
+                prot = 1; //스크롤 잠금상태 변경
+
+
+                //2. 브라우저 구분하기
+
+                // ie구버전(ie8이전) 구분하기
+                // 변수 = 전달변수1 || 전달변수2;
+                // 둘 중에 존재하는(true) 전달변수가 할당됨
+                // window.event -> ie8 이전 버전용
+
+                var evt = window.event || e;
+
+
+                //3. wheelDelta 값 구하기
+                /*
+                wheelDelta 속성은?
+                - ie, chrome 용 (opera는 detail)
+                - 마우스 이벤트에 따라 발생하는 이벤트 횟수 및 방향과 이동 거리 등을 리턴해주는 속성
+                - click 이벤트에 적용하면 클릭된 횟수가 리턴
+                - mousewheel 이벤트는 스크롤방향과 이동거리 리턴
+                (+는 윗방향, -는 아랫방향)
+                */
+
+                //조건연산자를 사용하여 브라우저별 구분 (opera detail활용)
+                //var delta = evt.detail?evt.detail:evt.wheelDelta;
+
+                var delta = evt.wheelDelta;
+
+
+                /*////파이어폭스를 위한 별도처리///////
+                1. 파이어폭스는 detail 처리시 originalEvent.detail 사용
+                2. 파이어폭스는 스크롤 처리 방향이 반대 (+,-가 반대)
+                ////////////////////////////////////*/
+
+                if (/Firefox/i.test(navigator.userAgent)) {
+                    delta = -evt.originalEvent.detail;
+                }
+                // 정규표현식.test(값)
+                // test의 값이 정규표현식에 맞으면 true, 틀리면 false
+                // navigator.userAgent -> 현재 브라우저 객체를 리턴함
+
+                console.log('마우스 휠 델타값: ' + delta);
+
+
+                //4. 마우스휠 이벤트로 페이지 이동하기
+
+                //마우스 휠 방향에 따라서 페이지 번호 변경
+                if (delta > 0) { //양수 - 윗방향
+                    pno--; //페이지번호 감소
+                    if (pno === -1) pno = 0;
+                } else { //delta < 0, 음수 - 아랫방향
+                    pno++;
+                    if (pno === totcnt) pno = totcnt - 1;
+                }
+
+                console.log('페이지번호: ' + pno);
+
+
+                // 해당 순번 페이지 높이값(top) 구하기
+                var pagepos = $('.page').eq(pno).offset().top;
+                console.log('페이지 높잇값: ' + pagepos);
+
+
+                // 페이지 이동 애니메이션
+                $('html,body').stop().animate({
+                    scrollTop: pagepos + 'px'
+                }, 800, 'easeInOutQuint', function() {
+                    prot = 0; //스크롤 잠금해제
+
+                    //각 페이지별 등장요소 초기 css
+                    initSet();
+
+                    //페이지 액션 호출!!!!
+                    pageAction();
+
+                }); //animate
+
+
+                // 현재 메뉴 변경 함수호출
+                chgMenu();
+
+            }); ////mousewheel
+
+
+            //GNB의 a링크, 블릿의 a링크를 클릭하면 해당페이지 위치로 스크롤 애니메이션
+            $('#gnb a, #bnavi a').click(function(e) {
+
+                // a태그 기본이동막기
+                e.preventDefault();
+
+                // a태그의 href값 읽어오기
+                var pid = $(this).attr('href');
+                console.log(pid);
+
+                // 현재 클릭된 a태그의 부모 li 순번(인덱스) 알아오기
+                var idx = $(this).parent().index();
+                pno = idx;
+
+
+                // 클릭된 id박스 위치 알아내기
+                var pagepos = $(pid).offset().top;
+
+                // 스크롤 애니메이션
+                $('html,body').stop().animate({
+                    scrollTop: pagepos + 'px'
+                }, 800, 'easeInOutQuint', function() {
+
+                    //각 페이지별 등장요소 초기 css
+                    initSet();
+
+                    //페이지 액션 호출!!!!
+                    pageAction();
+
+                }); //animate
+
+                // 현재 메뉴 변경 함수호출
+                chgMenu();
+
+            }); ////click
+
+        }); //jQuery
+
+
+
+        /*///////////////////////////////////////////
+            함수명 : chgMenu
+            기능 : GNB메뉴와 블릿메뉴를 현재 페이지와 일치되도록 동시에 변경
+        //////////////////////////////////////////*/
+
+        function chgMenu() {
+
+            //클릭된 메뉴의 class변경하기(나머지 지우기)
+            $('#gnb li').eq(pno).addClass('selM').siblings().removeClass('selM');
+
+            //클릭된 블릿 메뉴의 class변경하기(나머지 지우기)
+            $('#bnavi li').eq(pno).addClass('selB').siblings().removeClass('selB');
+
+        } ////chgMenu
+
+
+        /*///////////////////////////////////////////
+            함수명 : initSet
+            기능 : 각 페이지별 등장요소 초기 CSS 셋팅
+        //////////////////////////////////////////*/
+        function initSet() {
+            //1.닥터두리틀
+            $('#page1 .minfo').css({
+                left: '150%'
+            });
+            //2.안녕베일리
+            $('#page2 .minfo').hide(); //display:none;
+            //3.라라랜드
+            $('#page3 .minfo').css({
+                top: '-100%'
+            });
+            //4.어바웃타임
+            $('#page4 .minfo').css({
+                transform: 'translate(-50%,-50%) scale(0)'
+            });
+            //5.어벤져스
+            $('#page5 .minfo').css({
+                transform: 'translate(-50%,-50%) rotateY(180deg)'
+            });
+            //6.아이언맨3
+            $('#page6 .minfo').css({
+                transform: 'translate(-50%,-50%) rotate(1000deg) scale(0)'
+            });
+            //7.라이온킹
+            $('#page7 .minfo').css({
+                transform: 'tranlate(-50%,-50%) scaleX(10)',
+                opacity: '0'
+            });
+
+
+        } ///initSet 함수
+
+
+        /*///////////////////////////////////////////
+            함수명 : pageAction (else if문 사용)
+            기능 : 각 페이지별 등장액션
+        //////////////////////////////////////////*/
+        function pageAction() {
+            //1.닥터두리틀
+            if (pno === 0) { //오른쪽에서 중앙으로 날아오기  
+                $('#page1 .minfo').delay(1000).stop().animate({
+                    left: '50%'
+                }, 1500, 'easeOutElastic'); //animate
+            }
+            //2.안녕베일리
+            else if (pno === 1) {
+                $('#page2 .minfo').stop().fadeIn(800);
+            }
+            //3.라라랜드
+            else if (pno === 2) {
+                $('#page3 .minfo').stop().animate({
+                    top: '50%'
+                }, 1200, 'easeOutElastic'); //animate
+            }
+            //4.어바웃타임
+            else if (pno === 3) {
+                $('#page4 .minfo').css({
+                    transform: 'translate(-50%,-50%) scale(1)',
+                    transition: 'all 1.5s ease-out'
+                });
+            }
+            //5.어벤저스
+            else if (pno === 4) {
+                $('#page5 .minfo').css({
+                    transform: 'translate(-50%,-50%) rotateY(0deg)',
+                    transition: 'all 1.2s ease-out'
+                });
+            }
+            //6.아이언맨3
+            else if (pno === 5) {
+                $('#page6 .minfo').css({
+                    transform: 'translate(-50%,-50%) rotate(0deg) scale(1)',
+                    transition: 'all 2s ease-out'
+                });
+            }
+            //7.라이온킹
+            else if (pno === 6) {
+                $('#page7 .minfo').css({
+                    transform: 'translate(-50%,-50%) scaleX(1)',
+                    opacity: '1',
+                    transition: 'all 2s ease-out'
+                });
+            }
+
+        } ///pageAction
+    </script>
+
+    <style>
+        /**구글웹폰트-나눔펜**/
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+        /*font-family: 'Nanum Pen Script', cursive;*/
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            /*스크롤 숨기기*/
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        ul,
+        ol {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        ul:after,
+        ol:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        li {
+            float: left;
+        }
+
+        img {
+            border: none;
+        }
+
+        /*탑영역 디자인*/
+        #top {
+            width: 100%;
+            height: 80px;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            z-index: 9999;
+        }
+
+        .inbox {
+            max-width: 1400px;
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            /*outline: 3px solid red;*/
+            position: relative;
+        }
+
+        #logo {
+            position: absolute;
+            display: block;
+            width: 250px;
+            height: 100%;
+            /*outline: 3px solid lime;*/
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #logo img {
+            width: 50%;
+            position: relative;
+            top: 10px;
+        }
+
+        /*GNB 메뉴*/
+        #gnb {
+            position: absolute;
+            top: 40px;
+            right: 2%;
+        }
+
+        #gnb li {
+            margin: 0 7px;
+        }
+
+        #gnb li a {
+            /*color: #fff;*/
+        }
+
+        #gnb li a:hover {
+            color: lime;
+            text-decoration: overline;
+        }
+
+        #gnb li:hover {
+            transform: scale(1.1);
+        }
+
+        /*선택된 메뉴 - selM*/
+        .selM {
+            transform: scale(1.2);
+        }
+
+        .selM a {
+            color: lime;
+            text-decoration: overline;
+        }
+
+        /*블릿 네비게이션*/
+        ol#bnavi {
+            width: 15px;
+            position: fixed;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        ol#bnavi li {
+            width: 100%;
+            height: 15px;
+            border: 2px solid #ccc;
+            box-sizing: border-box;
+            border-radius: 50%;
+            position: relative;
+            /*span 위치 기준요소*/
+            margin: 6px 0;
+            box-shadow: 0 0 3px #777;
+        }
+
+        ol#bnavi a {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        ol#bnavi span {
+            font: bold .9rem '맑은 고딕';
+            position: absolute;
+            right: 200%;
+            top: -50%;
+            white-space: nowrap;
+            text-shadow: 1px 0 #888, -1px 0 #888, 0 1px #888, 0 -1px #888;
+            display: none;
+        }
+
+        #bnavi li:hover span {
+            display: block;
+        }
+
+        /*선택된 블릿 - selB*/
+        .selB {
+            background-color: #ec686a;
+            transform: scale(1.15);
+        }
+
+        .selB span {
+            display: block !important;
+        }
+
+
+        /*개별페이지 디자인*/
+        .page {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #page1 {
+            background: url(images/p1.png) no-repeat top/cover;
+        }
+
+        #page2 {
+            background: url(images/p2.png) no-repeat top/cover;
+        }
+
+        #page3 {
+            background: url(images/p3.png) no-repeat top/cover;
+        }
+
+        #page4 {
+            background: url(images/p4.png) no-repeat top/cover;
+        }
+
+        #page5 {
+            background: url(images/p5.png) no-repeat top/cover;
+        }
+
+        #page6 {
+            background: url(images/p6.png) no-repeat top/cover;
+        }
+
+        #page7 {
+            background: url(images/p7.png) no-repeat top/cover;
+        }
+
+        /* 각 페이지 영화소개 박스 */
+        .minfo {
+            width: 450px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 10px 20px;
+            white-space: nowrap;
+            font-family: 'Nanum Pen Script', cursive;
+            letter-spacing: 3px;
+        }
+
+        .minfo>h1 {
+            font-size: 44px;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .minfo>h1>span {
+            font-size: 28px;
+        }
+
+        .minfo>h2 {
+            font-size: 34px;
+        }
+
+        .minfo>h3 {
+            font-size: 30px;
+            /*letter-spacing: 3px;*/
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="top">
+        <div class="inbox">
+            <a href="#" id="logo"><img src="images/logo_cgv.png" alt="cgv로고"></a>
+
+            <!--GNB메뉴-->
+            <nav id="gnb">
+                <ul>
+                    <li class="selM"><a href="#page1">닥터두리틀</a></li>
+                    <li><a href="#page2">안녕베일리</a></li>
+                    <li><a href="#page3">라라랜드</a></li>
+                    <li><a href="#page4">어바웃타임</a></li>
+                    <li><a href="#page5">어벤져스</a></li>
+                    <li><a href="#page6">아이언맨3</a></li>
+                    <li><a href="#page7">라이온킹</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!--각 페이지 박스-->
+    <!--section#page$.page*7-->
+    <section id="page1" class="page">
+        <article class="minfo">
+            <h1>닥터 두리틀 <span>(Dolittle, 2020)</span></h1>
+            <h2>코미디, 가족, 판타지</h2>
+            <h3>감독:스티븐 개건</h3>
+            <h3>배우:로버트 다우니 주니어</h3>
+            <h3>등급:전체관람가</h3>
+        </article>
+    </section>
+    <section id="page2" class="page">
+        <article class="minfo">
+            <h1>안녕베일리 <span>(A Dog's Journey, 2019)</span></h1>
+            <h2>가족</h2>
+            <h3>감독:게일 맨쿠소</h3>
+            <h3>배우:조시 게드, 데니스 퀘이드, 캐서린 프레스콧</h3>
+            <h3>등급:전체관람가</h3>
+        </article>
+    </section>
+    <section id="page3" class="page">
+        <article class="minfo">
+            <h1>라라랜드 <span>(La La Land, 2016)</span></h1>
+            <h2>드라마, 뮤지컬, 멜로/로맨스</h2>
+            <h3>감독:데이미언 셔젤</h3>
+            <h3>배우:엠마 스톤, 라이언 고슬링</h3>
+            <h3>등급:12세 관람가</h3>
+        </article>
+    </section>
+    <section id="page4" class="page">
+        <article class="minfo">
+            <h1>어바웃타임 <span>(About Time, 2013)</span></h1>
+            <h2>멜로/로맨스, 코미디</h2>
+            <h3>감독:리차드 커티스</h3>
+            <h3>배우:레이첼 맥아담스, 도널 클리슨</h3>
+            <h3>등급:15세 관람가</h3>
+        </article>
+    </section>
+    <section id="page5" class="page">
+        <article class="minfo">
+            <h1>어벤져스:엔드게임 <span>(Avengers:Endgame, 2019)</span></h1>
+            <h2>액션, SF</h2>
+            <h3>감독:안소니 루소, 조 루소</h3>
+            <h3>배우:로버트 다우니 주니어, 크리스 에반스</h3>
+            <h3>등급:12세 관람가</h3>
+        </article>
+    </section>
+    <section id="page6" class="page">
+        <article class="minfo">
+            <h1>아이언맨3 <span>(Iron Man3, 2013)</span></h1>
+            <h2>SF, 모험, 액션</h2>
+            <h3>감독:셰인 블랙</h3>
+            <h3>배우:로버트 다우니 주니어, 기네스 팰트로</h3>
+            <h3>등급:12세 관람가</h3>
+        </article>
+    </section>
+    <section id="page7" class="page">
+        <article class="minfo">
+            <h1>라이온킹 <span>(The Lion King, 2019)</span></h1>
+            <h2>모험, 드라마, 가족</h2>
+            <h3>감독:존 파브로</h3>
+            <h3>배우:도날드 글로버, 비욘세</h3>
+            <h3>등급:전체관람가</h3>
+        </article>
+    </section>
+
+    <!--블릿 네비게이션-->
+    <ol id="bnavi">
+        <!--li*7>a[href='#page$']>span-->
+        <li class="selB"><a href="#page1"><span>닥터두리틀</span></a></li>
+        <li><a href="#page2"><span>안녕 베일리</span></a></li>
+        <li><a href="#page3"><span>라라랜드</span></a></li>
+        <li><a href="#page4"><span>어바웃타임</span></a></li>
+        <li><a href="#page5"><span>어벤져스</span></a></li>
+        <li><a href="#page6"><span>아이언맨3</span></a></li>
+        <li><a href="#page7"><span>라이온킹</span></a></li>
+    </ol>
+
+</body>
+
+</html>

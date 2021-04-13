@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>07_example_remove()</title>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+    
+        $(document).ready(function(){
+            
+            //미션 : 풍선 이미지를 클릭하면 >> img, click()
+            //이미지가 터지는 이미지로 변경 후 >> attr()
+            //이미지 태그를 제거하시오 >> remove()
+            
+            $('.container img').css({
+                width: '200px',
+                height: '260px'
+            })
+            .click(function(){
+                //이미지 src 변경하기
+                $(this).attr('src','image/balloon-burst.jpg').animate({
+                    //이미지가 커지고!
+                    width: '300px',
+                    height: '360px'
+                }, 100, function(){
+                    //풍선 img태그 사라짐
+                    $(this).remove();
+                });
+            }); 
+        });
+    
+    
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img src="image/balloon_blue.png" alt="파랑풍선">
+        <img src="image/balloon_green.png" alt="녹색풍선">
+        <img src="image/balloon_red.png" alt="빨강풍선">
+    </div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>dropdown_menu3</title>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        $(function() {
+            $('.depth01>li').mouseenter(function() {
+                $(this).children('ul.depth02').stop().slideDown();
+            }); //mouseenter
+            $('.depth01>li').mouseleave(function(){
+                $('ul.depth02').stop().slideUp();
+            });//mouseleave
+        }); //jQuery
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        body {
+            /*            height: 1500px;*/
+            background: url(illom1.jpg) no-repeat top center;
+        }
+
+        nav {
+            height: 50px;
+            border-bottom: 1px solid gray;
+        }
+
+        .depth01 {
+            width: 1050px;
+            margin: 0 auto;
+            /*            outline: 5px solid red;*/
+            text-align: center;
+        }
+
+        .depth01>li {
+            float: left;
+            width: 150px;
+            line-height: 50px;
+        }
+
+        .depth01>li>a {
+            display: block;
+            color: black;
+            font-size: 0.8em;
+        }
+
+        .depth02 {
+            background-color: #444;
+            display: none;
+        }
+
+        .depth02>li {}
+
+        .depth02>li>a {
+            font-size: 0.7em;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul class="depth01">
+            <li>
+                <a href="#">침실</a>
+                <ul class="depth02">
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">거실</a>
+                <ul class="depth02">
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">주방</a>
+                <ul class="depth02">
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">키즈룸</a>
+                <ul class="depth02">
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">학생방</a>
+                <ul class="depth02">
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">서재</a>
+                <ul class="depth02">
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">시리즈</a>
+                <ul class="depth02">
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                    <li><a href="#">Sub menu</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</body></html>

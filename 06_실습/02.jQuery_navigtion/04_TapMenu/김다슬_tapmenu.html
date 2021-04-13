@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>tapmenu</title>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            $('.wrap>ul>li').click(function(){
+                
+                //on 클래스 추가
+                
+                $(this).addClass('on').siblings().removeClass('on');
+                
+                var idx = $(this).index();
+                console.log(idx);
+                
+                $('div.contents_wrap>div').eq(idx).addClass('on').siblings().removeClass('on');
+            });//click
+            
+            
+            
+        });//jQuery
+
+
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .wrap {
+            width: 500px;
+            margin: 30px auto;
+
+        }
+
+        ul li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        ul li a {
+            color: #000;
+        }
+
+        ul li.on a {
+            font-weight: bold;
+            color: aquamarine;
+        }
+
+        div.contents_wrap>div {
+            width: 100%;
+            height: 400px;
+            display: none;
+        }
+
+        div.contents_wrap>div.on {
+            display: block;
+            font-size: 24px;
+        }
+
+        .contents_wrap .con1 {
+            background-color: firebrick;
+        }
+
+        .contents_wrap .con2 {
+            background-color: dodgerblue;
+        }
+
+        .contents_wrap .con3 {
+            background-color: darksalmon;
+        }
+
+        .contents_wrap .con4 {
+            background-color: darkseagreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <ul>
+            <li class="on"><a href="#none">menu1</a></li>
+            <li><a href="#none">menu2</a></li>
+            <li><a href="#none">menu3</a></li>
+            <li><a href="#none">menu4</a></li>
+        </ul>
+        <div class="contents_wrap">
+            <div class="con1 on">메뉴1 내용</div>
+            <div class="con2">메뉴2 내용</div>
+            <div class="con3">메뉴3 내용</div>
+            <div class="con4">메뉴4 내용</div>
+        </div>
+    </div>
+</body>
+
+</html>

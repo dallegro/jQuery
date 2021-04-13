@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>03_example_prepend()</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+         $(function(){
+             
+             //미션 : prepend를 클릭하면
+             //#container안에 마지막 이미지를
+             //맨 앞으로 이동시키시오.
+             $('#prepend').click(function(){
+                 $('#container').prepend($('#container img').last());
+             });
+             
+         });
+    
+    
+    </script>
+</head>
+<body>
+    
+    <div id="container">
+        <img src="image/pic1.jpg" alt="사진">
+        <img src="image/pic2.jpg" alt="사진">
+        <img src="image/pic3.jpg" alt="사진">
+    </div>
+    
+    <p>prepend를 사용하여 사진을 순환합니다.</p>
+    
+    <button id="prepend" title="prepend">prepend</button>
+    
+    <style>
+        img {
+            padding: 0;
+            margin: 5px;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+    
+</body>
+</html>

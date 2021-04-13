@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>05_mouseover_mouseout()</title>
+    
+    <script src="jquery-1.12.4.min.js"></script>
+    <script>
+        /*mouseover() 이벤트 메서드 : 선택한 요소에 마우스 포인터를 올릴 때마다 이벤트 발생, 또는 선택한 요소에 mouseover 이벤트를 강제로 발생
+        
+        mouseout() 이벤트 메서드 : 선택한 요소에서 마우스 포인터가 벗어날 때마다 이벤트 발생, 또는 선택한 요소에 mouseout 이벤트를 강제로 발생
+        
+        hover() 이벤트 메서드 : 선택한 요소에 마우스 포인터가 올라갈 때와 선택한 요소에서 벗어날 때 각각 이벤트 발생, 각각 다른 이벤트 핸들러를 실행시킴
+        *기본형
+        $("이벤트대상").hover(
+            function(){마우스오버시 실행될 코드},
+            function(){마우스아웃시 실행될 코드}
+        );
+        
+        */
+        
+        $(function(){
+            $('.btn1').on({ //on()메서드 등록방식3
+                "mouseover" : function(){
+                    $('.txt1').css({
+                        backgroundColor: "darkseagreen"
+                    });
+                },
+                "mouseout" : function(){
+                    $('.txt1').css({
+                        background: "none"
+                    });
+                }
+            }); //on()
+            
+            //hover()
+            $('.btn2').hover(function(){
+                $('.txt2').css({
+                    backgroundColor: "indianred",
+                    color:"white"
+                });
+            }, function(){
+                $('.txt2').css({
+                    background: "none",
+                    color:"black"
+                });
+            });
+            
+            
+        }); ///jQuery
+    
+    
+    </script>
+</head>
+<body>
+   <p><button class="btn1">Mouse Over / Mouse Out</button></p>
+   <p class="txt1">내용1</p>
+   
+   <p><button class="btn2">Hover</button></p>
+   <p class="txt2">내용2</p>
+    
+     
+      
+       
+        
+         
+          
+            
+</body>
+</html>
